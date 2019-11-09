@@ -5,12 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     float hp;
-    List<int> platform = new List<int>();
+    //List<int> platform = new List<int>();
 
     // Start is called before the first frame update
     void Start()
     {
-        platform.Add(0);
+        //platform.Add(0);
         hp = 100;
     }
 
