@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharMovement : MonoBehaviour
 {
-    public float speed = 10;
+    public float speed = 5;
     Rigidbody rb;
     Camera camera;
 
@@ -82,14 +82,14 @@ public class CharMovement : MonoBehaviour
                 //pos = new Vector3(pos.x + 1.0f, pos.y + 1.0f, pos.z);
                 //transform.position = camera.ScreenToWorldPoint(pos);
 
-                gameObject.transform.Translate(new Vector3(1, 0, 0) * 5 * Time.deltaTime);
+                gameObject.transform.Translate(new Vector3(1, 0.5f, 0) * speed * Time.deltaTime);
 
                 //Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);               
                 //transform.position = ray.transform.position;
             }
             else if (ray.collider.tag == "Down")
             {
-                gameObject.transform.Translate(new Vector3(1,0, 0) * 5 * Time.deltaTime);
+                gameObject.transform.Translate(new Vector3(1,-0.5f, 0) * speed * Time.deltaTime);
                 print("아2");
                 //Vector3 pos = camera.WorldToScreenPoint(transform.position);
                 //pos = new Vector3(pos.x + 1.0f, pos.y-1.0f, pos.z);
@@ -98,7 +98,7 @@ public class CharMovement : MonoBehaviour
             }
             else if (ray.collider.tag == "Flat")
             {
-                gameObject.transform.Translate(new Vector3(1, 0, 0) * 5 *Time.deltaTime);
+                gameObject.transform.Translate(new Vector3(1, 0, 0) * speed *Time.deltaTime);
                 
                 print("dididsidi");
                 //Vector3 pos = camera.WorldToScreenPoint(transform.position);
