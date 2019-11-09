@@ -82,6 +82,9 @@ public class CharMovement : MonoBehaviour
 
                 
             }
+        } else
+        {
+            // 게임 종료
         }
 
     }
