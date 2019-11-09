@@ -15,11 +15,9 @@ public class CharMovement : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        SetFirstPlatform();
         platform.Insert(1, "Flat");
-        //prevPlatformName = 
         camera = Camera.main;
-
-
     }
 
     // Update is called once per frame
@@ -30,7 +28,22 @@ public class CharMovement : MonoBehaviour
     }
 
     void CheckPlatform() {
-        
+        if (newPlatformName != null)
+        {
+            if (prevPlatformName != newPlatformName)
+            {
+                
+            }
+        }
+    }
+
+    // 첫번째 플랫폼의 이름을 받아 저장
+    void SetFirstPlatform()
+    {
+        RaycastHit ray;
+        Physics.Raycast(transform.position, new Vector3(0, -1, 0) * 0.5f, out ray);
+        prevPlatformName = ray.collider.gameObject.name;
+
     }
 
     private void FixedUpdate()
@@ -59,21 +72,13 @@ public class CharMovement : MonoBehaviour
             {
                 // 캐릭터 움직임
                 gameObject.transform.Translate(new Vector3(1,-0.5f, 0) * speed * Time.deltaTime);
-                //print("아2");
-                //Vector3 pos = camera.WorldToScreenPoint(transform.position);
-                //pos = new Vector3(pos.x + 1.0f, pos.y-1.0f, pos.z);
-                //transform.position = camera.ScreenToWorldPoint(pos);
-                //rb.velocity = new Vector3(7, -5, 0);
+                
             }
             else if (ray.collider.tag == "Flat")
             {
                 // 캐릭터 움직임
                 gameObject.transform.Translate(new Vector3(1, 0, 0) * speed *Time.deltaTime);
                 
-                //print("dididsidi");
-                //Vector3 pos = camera.WorldToScreenPoint(transform.position);
-                //pos = new Vector3(pos.x + 1.0f, pos.y, pos.z);
-                //transform.position = camera.ScreenToWorldPoint(pos);
 
                 
             }

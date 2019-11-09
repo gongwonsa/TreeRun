@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckPlayerDie();
     }
 
     // 플레이어가 죽었는 지 확인하는 함수
@@ -31,6 +31,11 @@ public class GameManager : MonoBehaviour
 
     void PlayerDie ()
     {
+        print("게임 오버");
+    }
 
+    public float SetHp()
+    {
+        return hp; 
     }
 }
