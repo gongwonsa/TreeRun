@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public float playTimeCurrent = 10f;
-    public float playTimeMax = 10;
+
     public Image Timebar;
+    
+   
+
+   
     
     //List<int> platform = new List<int>();
 
@@ -18,19 +21,17 @@ public class GameManager : MonoBehaviour
        // hp = 100;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!CheckPlayerDie())
+        if (!DataManager.Instance.PlayerDie)
         {
-            playTimeCurrent -= 1 * Time.deltaTime;
+            DataManager.Instance.playTimeCurrent -= 1 * Time.deltaTime;
 
-            Timebar.fillAmount = playTimeCurrent / playTimeMax;
+            Timebar.fillAmount = DataManager.Instance.playTimeCurrent / DataManager.Instance.playTimeMax;
 
-
-
-            if(playTimeCurrent<0)
+            if(DataManager.Instance.playTimeCurrent <0)
             {
+                DataManager.Instance.PlayerDie = true;
                 PlayerDie();
             }
         }
@@ -39,16 +40,16 @@ public class GameManager : MonoBehaviour
     }
 
     // 플레이어가 죽었는 지 확인하는 함수
-    bool CheckPlayerDie()
+    /*bool CheckPlayerDie()
     {
-        if (playTimeCurrent <= 0)
+        if (DataManager.Instance.playTimeCurrent <= 0)
         {
             PlayerDie();
             return true;
         }
         else
             return false;
-    }
+    }*/
 
     void PlayerDie ()
     {
