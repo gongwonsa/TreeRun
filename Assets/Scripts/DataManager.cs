@@ -28,7 +28,7 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            DestroyObject(gameObject);
+            Destroy(gameObject);
         }
     }
 
