@@ -82,23 +82,24 @@ public class CharMovement : MonoBehaviour
                 //pos = new Vector3(pos.x + 1.0f, pos.y + 1.0f, pos.z);
                 //transform.position = camera.ScreenToWorldPoint(pos);
 
-                rb.AddForce(new Vector3(rb.mass*Mathf.Sin(26.3f)*20, 0, 0));
+                gameObject.transform.Translate(new Vector3(1, 0, 0) * 5 * Time.deltaTime);
 
                 //Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);               
                 //transform.position = ray.transform.position;
             }
             else if (ray.collider.tag == "Down")
             {
-                rb.AddForce(new Vector3(rb.mass * Mathf.Sin(-26.3f)*10, 0, 0));
+                gameObject.transform.Translate(new Vector3(1,0, 0) * 5 * Time.deltaTime);
                 print("아2");
                 //Vector3 pos = camera.WorldToScreenPoint(transform.position);
                 //pos = new Vector3(pos.x + 1.0f, pos.y-1.0f, pos.z);
                 //transform.position = camera.ScreenToWorldPoint(pos);
-                rb.velocity = new Vector3(7, -5, 0);
+                //rb.velocity = new Vector3(7, -5, 0);
             }
             else if (ray.collider.tag == "Flat")
             {
-                rb.AddForce(10, 0, 0);
+                gameObject.transform.Translate(new Vector3(1, 0, 0) * 5 *Time.deltaTime);
+                
                 print("dididsidi");
                 //Vector3 pos = camera.WorldToScreenPoint(transform.position);
                 //pos = new Vector3(pos.x + 1.0f, pos.y, pos.z);
