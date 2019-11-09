@@ -15,4 +15,9 @@ public class Canvas : MonoBehaviour
     {
         
     }
+
+    public void SetPlatformType(string type)
+    {
+
+    } 
 }
