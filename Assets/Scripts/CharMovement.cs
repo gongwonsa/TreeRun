@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharMovement : MonoBehaviour
 {
-    public float speed = 5;
+    public float speed = 2;
     Rigidbody rb;
     Camera camera;
     List<string> platform = new List<string>();
@@ -33,7 +33,7 @@ public class CharMovement : MonoBehaviour
 
         RaycastHit ray;
         print(currentPlatform.tag);
-        Debug.DrawRay(currentPlatform.transform.position, new Vector3(1, 0, 0) * (((currentPlatform.GetComponent<RectTransform>().rect.width)/2) + 100), Color.red, 100.0f);
+        
         if (currentPlatform.tag == "FlatPlatform")
         {
             if(Physics.Raycast(currentPlatform.transform.position, new Vector3(1, 0, 0) * (((currentPlatform.GetComponent<RectTransform>().rect.width) / 2) + 0.5f), out ray))
@@ -48,6 +48,7 @@ public class CharMovement : MonoBehaviour
             }
         } else
         {
+            Debug.DrawRay(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0) * (((currentPlatform.GetComponent<RectTransform>().rect.width) / 2) + 100), Color.red, 100.0f);
             if (Physics.Raycast(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0) * (((currentPlatform.transform.parent.transform.GetChild(2).GetComponent<RectTransform>().rect.width) / 2) + 0.5f), out ray))
             {
                 print("으음");
@@ -82,8 +83,8 @@ public class CharMovement : MonoBehaviour
             // 현재 밟고 있는 플랫폼의 종류와 오브젝트 이름 
             //platform.Insert(0, ray.collider.gameObject.transform.parent.tag);
             currentPlatform = ray.collider.gameObject;
-            print(currentPlatform);
-            print(ray.collider.gameObject.GetComponent<RectTransform>().rect.width);
+            //print(currentPlatform);
+            //print(ray.collider.gameObject.GetComponent<RectTransform>().rect.width);
             //print(newPlatformName);
 
             if (ray.collider.tag == "Up")
@@ -115,7 +116,11 @@ public class CharMovement : MonoBehaviour
 
     public Vector3 SetPlatformPosition()
     {
-        return currentPlatform.transform.position;
+        print(currentPlatform.name + " "+ currentPlatform.transform.localPosition);
+        if (currentPlatform.tag == "FlatPlatform ")
+            return currentPlatform.transform.parent.GetChild(1).transform.position;
+        else 
+            return currentPlatform.transform.position;
     }
 
     

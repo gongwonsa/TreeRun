@@ -17,8 +17,8 @@ public class PlatformLoader : MonoBehaviour
     {
         camera = Camera.main;
         player = GameObject.Find("Player");
-        platformWidth = platformPrefabs[0].GetComponent<RectTransform>().rect.width;
-        platformDepth = platformPrefabs[0].GetComponent<RectTransform>().rect.height;
+        platformWidth = platformPrefabs[0].GetComponent<RectTransform>().rect.width * 1.85f;
+        platformDepth = platformPrefabs[0].GetComponent<RectTransform>().rect.height * 1.85f;
         platformHeight = Mathf.Abs(platformPrefabs[1].transform.GetChild(0).transform.position.y - platformPrefabs[1].transform.GetChild(2).transform.position.y);
         print("너비: " + platformWidth);
         
@@ -35,12 +35,12 @@ public class PlatformLoader : MonoBehaviour
         }
         else if (type == 1) {
             print("업");
-            Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + ((platformHeight+platformDepth)/2), platPosition.z), Quaternion.identity);
+            Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + ((platformHeight+platformDepth/2)/2), platPosition.z), Quaternion.identity);
         }
         else if (type == 2)
         {
             print("다운");
-            Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - ((platformHeight + platformDepth) / 2), platPosition.z), Quaternion.identity);
+            Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - ((platformHeight + platformDepth / 2) / 2), platPosition.z), Quaternion.identity);
         }
     }
 
