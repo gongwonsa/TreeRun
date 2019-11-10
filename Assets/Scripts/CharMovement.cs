@@ -9,7 +9,8 @@ public class CharMovement : MonoBehaviour
     Camera camera;
     List<string> platform = new List<string>();
     string prevPlatformName;
-    string newPlatformName;
+    string currentPlatformName;
+    GameObject currentPlatform;
 
     // Start is called before the first frame update
     void Start()
@@ -23,18 +24,41 @@ public class CharMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckPlatform();
+        //CheckPlatform();
         
     }
 
-    void CheckPlatform() {
-        if (newPlatformName != null)
+    // 플레이어가 밟고 있는 플랫폼 다음에 다른 길이 있는 지 확인 
+    public bool isExistPlatform() {
+
+        RaycastHit ray;
+        print(currentPlatform.tag);
+        Debug.DrawRay(currentPlatform.transform.position, new Vector3(1, 0, 0) * (((currentPlatform.GetComponent<RectTransform>().rect.width)/2) + 100), Color.red, 100.0f);
+        if (currentPlatform.tag == "FlatPlatform")
         {
-            if (prevPlatformName != newPlatformName)
+            if(Physics.Raycast(currentPlatform.transform.position, new Vector3(1, 0, 0) * (((currentPlatform.GetComponent<RectTransform>().rect.width) / 2) + 0.5f), out ray))
             {
-                
+                // platform 생성 
+                print("으음");
+                return false;
+            } else
+            {
+                print("으음");
+                return true;
+            }
+        } else
+        {
+            if (Physics.Raycast(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0) * (((currentPlatform.transform.parent.transform.GetChild(2).GetComponent<RectTransform>().rect.width) / 2) + 0.5f), out ray))
+            {
+                print("으음");
+                return false;
+            } else
+            {
+                print("으음");
+                return true;
             }
         }
+
     }
 
     // 첫번째 플랫폼의 이름을 받아 저장
@@ -49,17 +73,18 @@ public class CharMovement : MonoBehaviour
     private void FixedUpdate()
     {
         RaycastHit ray;
-
         Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1.0f, Color.green, 100.0f);
 
         if (Physics.Raycast(transform.position, new Vector3(0, -1, 0) * 0.5f, out ray))
         {
-            print("dkdkdkdkdk");
+            //print("dkdkdkdkdk");
 
             // 현재 밟고 있는 플랫폼의 종류와 오브젝트 이름 
-            platform.Insert(0, ray.collider.tag);
-            newPlatformName = ray.collider.gameObject.name;
-            print(newPlatformName);
+            //platform.Insert(0, ray.collider.gameObject.transform.parent.tag);
+            currentPlatform = ray.collider.gameObject;
+            print(currentPlatform);
+            print(ray.collider.gameObject.GetComponent<RectTransform>().rect.width);
+            //print(newPlatformName);
 
             if (ray.collider.tag == "Up")
             { 
@@ -74,18 +99,24 @@ public class CharMovement : MonoBehaviour
                 gameObject.transform.Translate(new Vector3(1,-0.5f, 0) * speed * Time.deltaTime);
                 
             }
-            else if (ray.collider.tag == "Flat")
+            else
             {
                 // 캐릭터 움직임
+                print("dkdkdkdkdk");
                 gameObject.transform.Translate(new Vector3(1, 0, 0) * speed *Time.deltaTime);
-                
-
-                
             }
         } else
         {
+            
             // 게임 종료
         }
 
     }
+
+    public Vector3 SetPlatformPosition()
+    {
+        return currentPlatform.transform.position;
+    }
+
+    
 }

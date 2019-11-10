@@ -7,6 +7,9 @@ TagManager:
   - Up
   - Down
   - Flat
+  - UpPlatform
+  - DownPlatform
+  - FlatPlatform
   layers:
   - Default
   - TransparentFX

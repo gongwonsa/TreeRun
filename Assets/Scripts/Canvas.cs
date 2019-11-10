@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Canvas : MonoBehaviour
 {
+    GameObject player;
+    GameObject platformLoad;
+
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
+        platformLoad = GameObject.Find("PlatformLoad");
         
     }
 
@@ -16,8 +21,13 @@ public class Canvas : MonoBehaviour
         
     }
 
-    public void SetPlatformType(string type)
+    public void SetPlatformType(int type)
     {
+        if(player.GetComponent<CharMovement>().isExistPlatform())
+        {
+            print("어억");
+            platformLoad.GetComponent<PlatformLoader>().CreatePlatform(type);
+        }
 
     } 
 }

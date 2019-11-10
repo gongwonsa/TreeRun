@@ -8,7 +8,7 @@ public class Bug : MonoBehaviour
     {
         if (!DataManager.Instance.PlayerDie)
         {
-            if (other.name == "Character")
+            if (other.name == "Player")
             {
                 DataManager.Instance.playTimeCurrent += 2f;
                 DataManager.Instance.score += 10;
