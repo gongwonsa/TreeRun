@@ -117,10 +117,10 @@ public class CharMovement : MonoBehaviour
     public Vector3 SetPlatformPosition()
     {
         print(currentPlatform.name + " "+ currentPlatform.transform.localPosition);
-        if (currentPlatform.tag == "FlatPlatform ")
-            return currentPlatform.transform.parent.GetChild(1).transform.position;
-        else 
+        if (currentPlatform.tag == "FlatPlatform")
             return currentPlatform.transform.position;
+        else
+            return currentPlatform.transform.parent.GetChild(1).transform.position;
     }
 
     
