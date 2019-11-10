@@ -31,17 +31,32 @@ public class PlatformLoader : MonoBehaviour
 
         if (type == 0) {
             print("평평");
-            Instantiate(platformPrefabs[(int)platformList.Flat], new Vector3(platPosition.x + platformWidth, platPosition.y, platPosition.z), Quaternion.identity);
-        }
+			if (prevPlatType == 0)
+				Instantiate(platformPrefabs[(int)platformList.Flat], new Vector3(platPosition.x + platformWidth, platPosition.y, platPosition.z), Quaternion.identity);
+			else if (prevPlatType == 1)
+				Instantiate(platformPrefabs[(int)platformList.Flat], new Vector3(platPosition.x + platformWidth, platPosition.y+platformDepth, platPosition.z), Quaternion.identity);
+			else
+				Instantiate(platformPrefabs[(int)platformList.Flat], new Vector3(platPosition.x + platformWidth, platPosition.y - platformDepth, platPosition.z), Quaternion.identity);
+		}
         else if (type == 1) {
             print("업");
-            Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + ((platformHeight+platformDepth/2)/2), platPosition.z), Quaternion.identity);
-        }
+			if (prevPlatType == 0)
+				Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + (platformHeight-platformDepth), platPosition.z), Quaternion.identity);
+			else if(prevPlatType==1)
+				Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + (platformHeight ), platPosition.z), Quaternion.identity);
+			else
+				Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + (platformHeight - platformDepth-platformDepth), platPosition.z), Quaternion.identity);
+		}
         else if (type == 2)
         {
             print("다운");
-            Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - ((platformHeight + platformDepth / 2) / 2), platPosition.z), Quaternion.identity);
-        }
+			if (prevPlatType == 0)
+				Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - (platformHeight - platformDepth), platPosition.z), Quaternion.identity);
+			else if (prevPlatType == 1)
+				Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - (platformHeight), platPosition.z), Quaternion.identity);
+			else
+				Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - (platformHeight - platformDepth - platformDepth), platPosition.z), Quaternion.identity);
+		}
     }
 
 }
