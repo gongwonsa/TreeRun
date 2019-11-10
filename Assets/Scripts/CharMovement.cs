@@ -123,5 +123,22 @@ public class CharMovement : MonoBehaviour
             return currentPlatform.transform.parent.GetChild(1).transform.position;
     }
 
+    public int SetPrevPlatType()
+    {
+        if (currentPlatform.tag == "FlatPlatform")
+        {
+            return 0;
+        } else {
+            if(currentPlatform.transform.parent.tag == "UpPlatform")
+            {
+                return 1;
+
+            } else
+            {
+                return 2;
+            }
+        }
+    }
+
     
 }

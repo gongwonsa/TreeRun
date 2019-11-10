@@ -9,13 +9,12 @@ public class PlatformLoader : MonoBehaviour
     float platformWidth;
     float platformHeight;
     float platformDepth;
+    int prevPlatType;
     GameObject player;
-    Camera camera;
 
     // Start is called before the first frame update
     void Start()
     {
-        camera = Camera.main;
         player = GameObject.Find("Player");
         platformWidth = platformPrefabs[0].GetComponent<RectTransform>().rect.width * 1.85f;
         platformDepth = platformPrefabs[0].GetComponent<RectTransform>().rect.height * 1.85f;
@@ -28,6 +27,7 @@ public class PlatformLoader : MonoBehaviour
     public void CreatePlatform (int type)
     {
         Vector3 platPosition = player.GetComponent<CharMovement>().SetPlatformPosition();
+        prevPlatType = player.GetComponent<CharMovement>().SetPrevPlatType();
 
         if (type == 0) {
             print("평평");
