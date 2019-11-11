@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4765334144324394922}
   - component: {fileID: 5300923187309759714}
   - component: {fileID: 6351606345039225559}
+  - component: {fileID: 5693125038229958123}
   m_Layer: 0
   m_Name: path
   m_TagString: FlatPlatform
@@ -96,5 +97,17 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.0600004, y: 0.6000001, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4.1023645, y: 0.5999999, z: 0.2}
+  m_Center: {x: -0.021182394, y: 0, z: 0}
+--- !u!114 &5693125038229958123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478638674070597355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba6a930a5da4a744dabc58cbe23b9c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

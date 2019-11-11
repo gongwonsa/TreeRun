@@ -91,8 +91,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8400001, y: 0.6000001, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.88047135, y: 0.5999999, z: 0.2}
+  m_Center: {x: -0.020235777, y: 0, z: 0}
 --- !u!1 &3713564974644918611
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,6 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6954689874459103602}
+  - component: {fileID: 9026365618971974974}
   m_Layer: 0
   m_Name: up
   m_TagString: UpPlatform
@@ -126,6 +127,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9026365618971974974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3713564974644918611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba6a930a5da4a744dabc58cbe23b9c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5244849943829646605
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,10 +11,12 @@ public class CharMovement : MonoBehaviour
     string prevPlatformName;
     string currentPlatformName;
     GameObject currentPlatform;
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = gameObject.GetComponent<Rigidbody>();
         SetFirstPlatform();
         platform.Insert(1, "Flat");
@@ -39,11 +41,11 @@ public class CharMovement : MonoBehaviour
             if(Physics.Raycast(currentPlatform.transform.position, new Vector3(1, 0, 0) * (((currentPlatform.GetComponent<RectTransform>().rect.width) / 2) + 0.5f), out ray))
             {
                 // platform 생성 
-                print("으음");
+                //print("으음");
                 return false;
             } else
             {
-                print("으음");
+                //print("으음");
                 return true;
             }
         } else
@@ -51,11 +53,11 @@ public class CharMovement : MonoBehaviour
             Debug.DrawRay(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0) * (((currentPlatform.transform.parent.transform.GetChild(2).GetComponent<RectTransform>().rect.width) / 2) + 0.5f), Color.red, 100.0f);
             if (Physics.Raycast(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0) * (((currentPlatform.transform.parent.transform.GetChild(2).GetComponent<RectTransform>().rect.width) / 2) + 0.5f), out ray))
             {
-                print("으음");
+                //print("으음");
                 return false;
             } else
             {
-                print("으음");
+                //print("으음");
                 return true;
             }
         }
@@ -103,20 +105,21 @@ public class CharMovement : MonoBehaviour
             else
             {
                 // 캐릭터 움직임
-                print("dkdkdkdkdk");
+                //print("dkdkdkdkdk");
                 gameObject.transform.Translate(new Vector3(1, 0, 0) * speed *Time.deltaTime);
             }
         } else
         {
-            
-            // 게임 종료
+            print("여긴가");
+            gameObject.transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+            gameManager.PlayerDie();
         }
 
     }
 
     public Vector3 SetPlatformPosition()
     {
-        print(currentPlatform.name + " "+ currentPlatform.transform.localPosition);
+        //print(currentPlatform.name + " "+ currentPlatform.transform.localPosition);
         if (currentPlatform.tag == "FlatPlatform")
             return currentPlatform.transform.position;
         else
