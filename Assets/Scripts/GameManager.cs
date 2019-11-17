@@ -37,26 +37,11 @@ public class GameManager : MonoBehaviour
         
     }
 
-    // 플레이어가 죽었는 지 확인하는 함수
-    /*bool CheckPlayerDie()
-    {
-        if (DataManager.Instance.playTimeCurrent <= 0)
-        {
-            PlayerDie();
-            return true;
-        }
-        else
-            return false;
-    }*/
-
     public void PlayerDie ()
     {
         DataManager.Instance.PlayerDie = true;
         print("게임 오버");
     }
 
-   /* public float SetHp()
-    {
-        return hp; 
-    }*/
+  
 }

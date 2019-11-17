@@ -17,7 +17,7 @@ public class ObjectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mainCamera.WorldToScreenPoint(transform.position).x < -(platformLoad.GetComponent<PlatformLoader>().SetWidth()) || mainCamera.WorldToScreenPoint(transform.position).y < 0)
+        if (mainCamera.WorldToScreenPoint(transform.position).x < -(platformLoad.GetComponent<PlatformLoader>().SetWidth()))
         {
             Destroy(gameObject);
         }

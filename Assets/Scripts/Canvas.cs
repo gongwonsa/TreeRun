@@ -25,10 +25,29 @@ public class Canvas : MonoBehaviour
 
     public void SetPlatformType(int type)
     {
+        // 현재 밟고 있는 플랫폼 앞에 다른 길이 있는 지 확인 
         if (player.GetComponent<CharMovement>().isExistPlatform() && DataManager.Instance.PlayerDie == false)
-        {
+        { 
             print("어억");
             platformLoad.GetComponent<PlatformLoader>().CreatePlatform(type);
+            int random = Random.Range(0, 100);
+
+            if (random < 50)
+            {
+                // 0 - 49
+                platformLoad.GetComponent<PlatformLoader>().CreateBug();
+
+            }
+            else if (49 < random && random < 90)
+            {
+                // 50 - 89
+                platformLoad.GetComponent<PlatformLoader>().CreateObstacle();
+            }
+            else
+            {
+                
+            }
+
         }
 
     } 

@@ -6,12 +6,15 @@ public class PlatformLoader : MonoBehaviour
 {
     public enum platformList { Flat, Up, Down, Count }
     public GameObject[] platformPrefabs = new GameObject[(int)platformList.Count];
+    public GameObject[] bugPrefabs = new GameObject[(int)platformList.Count];
+    public GameObject[] obstaclePrefabs = new GameObject[(int)platformList.Count];
     float platformWidth;
     float platformHeight;
     float platformDepth;
     int prevPlatType;
     GameObject player;
     GameObject gameManager;
+    GameObject newPlatform;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +24,7 @@ public class PlatformLoader : MonoBehaviour
         platformWidth = platformPrefabs[0].GetComponent<RectTransform>().rect.width * 1.85f;
         platformDepth = platformPrefabs[0].GetComponent<RectTransform>().rect.height * 1.85f;
         platformHeight = Mathf.Abs(platformPrefabs[1].transform.GetChild(0).transform.position.y - platformPrefabs[1].transform.GetChild(2).transform.position.y);
+
         print("너비: " + platformWidth);
 
     }
@@ -35,34 +39,73 @@ public class PlatformLoader : MonoBehaviour
         {
             print("평평");
             if (prevPlatType == 0)
-                Instantiate(platformPrefabs[(int)platformList.Flat], new Vector3(platPosition.x + platformWidth, platPosition.y, platPosition.z), Quaternion.identity);
+                newPlatform = Instantiate(platformPrefabs[(int)platformList.Flat], new Vector3(platPosition.x + platformWidth, platPosition.y, platPosition.z), Quaternion.identity);
             else if (prevPlatType == 1)
-                Instantiate(platformPrefabs[(int)platformList.Flat], new Vector3(platPosition.x + platformWidth, platPosition.y + platformDepth, platPosition.z), Quaternion.identity);
+                newPlatform = Instantiate(platformPrefabs[(int)platformList.Flat], new Vector3(platPosition.x + platformWidth, platPosition.y + platformDepth, platPosition.z), Quaternion.identity);
             else
-                Instantiate(platformPrefabs[(int)platformList.Flat], new Vector3(platPosition.x + platformWidth, platPosition.y - platformDepth, platPosition.z), Quaternion.identity);
+                newPlatform = Instantiate(platformPrefabs[(int)platformList.Flat], new Vector3(platPosition.x + platformWidth, platPosition.y - platformDepth, platPosition.z), Quaternion.identity);
         }
         else if (type == 1)
         {
             print("업");
             if (prevPlatType == 0)
-                Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + (platformHeight - platformDepth), platPosition.z), Quaternion.identity);
+                newPlatform = Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + (platformHeight - platformDepth), platPosition.z), Quaternion.identity);
             else if (prevPlatType == 1)
-                Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + (platformHeight), platPosition.z), Quaternion.identity);
+                newPlatform = Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + (platformHeight), platPosition.z), Quaternion.identity);
             else
-                Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + (platformHeight - platformDepth - platformDepth), platPosition.z), Quaternion.identity);
+                newPlatform = Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + (platformHeight - platformDepth - platformDepth), platPosition.z), Quaternion.identity);
         }
         else if (type == 2)
         {
             print("다운");
             if (prevPlatType == 0)
-                Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - (platformHeight - platformDepth), platPosition.z), Quaternion.identity);
+                newPlatform = Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - (platformHeight - platformDepth), platPosition.z), Quaternion.identity);
             else if (prevPlatType == 1)
-                Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - (platformHeight - platformDepth - platformDepth), platPosition.z), Quaternion.identity);
+                newPlatform = Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - (platformHeight - platformDepth - platformDepth), platPosition.z), Quaternion.identity);
             else
-                Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - (platformHeight), platPosition.z), Quaternion.identity);
+                newPlatform = Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - (platformHeight), platPosition.z), Quaternion.identity);
         }
 
         
+    }
+
+    bool CreatePossible ()
+    {
+        GameObject[] Obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        if (Obstacles.Length > 0)
+        {
+            for (int i = 0; i < Obstacles.Length; i++)
+            {
+                if (player.transform.position.x < Obstacles[i].transform.position.x)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public void CreateBug()
+    {
+        if (CreatePossible())
+        {
+            int random = Random.Range(0, 3);
+            Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3*platformWidth, newPlatform.transform.position.y + Random.Range(-1, 3) * (platformHeight+platformDepth), 0), Quaternion.identity);
+        }
+    }
+    
+    public void CreateObstacle()
+    {
+        if (CreatePossible())
+        {
+            int random = Random.Range(0, 3);
+            Instantiate(obstaclePrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + Random.Range(-1, 3) * (platformHeight + platformDepth), 0), Quaternion.identity);
+        }
     }
 
     public float SetWidth() {
