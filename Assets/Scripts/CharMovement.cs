@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharMovement : MonoBehaviour
 {
-    public float speed = 2;
+    public float speed = 0.02f;
     Rigidbody rb;
     Camera camera;
     string prevPlatformName;
@@ -28,18 +28,22 @@ public class CharMovement : MonoBehaviour
         
         if (currentPlatform.tag == "FlatPlatform")
         {
-            if(Physics.Raycast(currentPlatform.transform.position, new Vector3(1, 0, 0) * (((currentPlatform.GetComponent<RectTransform>().rect.width) / 2) + 0.5f), out ray))
+            Debug.DrawRay(currentPlatform.transform.position, new Vector3(1, 0, 0) * (((currentPlatform.GetComponent<RectTransform>().rect.width) / 2) + 3.0f), Color.black, 100.0f);
+            if (Physics.Raycast(currentPlatform.transform.position, new Vector3(1, 0, 0), out ray, (((currentPlatform.GetComponent<RectTransform>().rect.width) / 2) + 3.0f)))
             {
+                print("여기다: " + ray.collider.gameObject.name);
                 return false;
             } else
             {
+                //print(ray.collider.gameObject.name);
                 return true;
             }
         } else
         {
             Debug.DrawRay(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0) * (((currentPlatform.transform.parent.transform.GetChild(2).GetComponent<RectTransform>().rect.width) / 2) + 0.5f), Color.red, 100.0f);
-            if (Physics.Raycast(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0) * (((currentPlatform.transform.parent.transform.GetChild(2).GetComponent<RectTransform>().rect.width) / 2) + 0.5f), out ray))
+            if (Physics.Raycast(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0), out ray, (((currentPlatform.transform.parent.transform.GetChild(2).GetComponent<RectTransform>().rect.width) / 2) + 0.5f)))
             {
+                print("여기다: " + ray.collider.gameObject.name);
                 return false;
             } else
             {
@@ -65,19 +69,19 @@ public class CharMovement : MonoBehaviour
             { 
                 // 캐릭터 움직임
                 //print(ray.collider.tag);
-                gameObject.transform.Translate(new Vector3(1, 0.5f, 0) * speed * Time.deltaTime);
+                gameObject.transform.Translate(new Vector3(0.2f, 0.1f, 0) * speed * Time.deltaTime);
                 
             }
             else if (ray.collider.tag == "Down")
             {
                 // 캐릭터 움직임
-                gameObject.transform.Translate(new Vector3(1,-0.5f, 0) * speed * Time.deltaTime);
+                gameObject.transform.Translate(new Vector3(0.2f,-0.1f, 0) * speed * Time.deltaTime);
                 
             }
             else
             {
                 // 캐릭터 움직임
-                gameObject.transform.Translate(new Vector3(1, 0, 0) * speed *Time.deltaTime);
+                gameObject.transform.Translate(new Vector3(0.2f, 0, 0) * speed *Time.deltaTime);
             }
         } else
         {

@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     {
         if (DataManager.Instance.PlayerDie == false)
         {
-            DataManager.Instance.playTimeCurrent -= 1 * Time.deltaTime;
+            //DataManager.Instance.playTimeCurrent -= 1 * Time.deltaTime;
             Timebar.fillAmount = DataManager.Instance.playTimeCurrent / DataManager.Instance.playTimeMax;
             score.GetScore();
 
