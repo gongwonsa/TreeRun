@@ -92,37 +92,57 @@ public class PlatformLoader : MonoBehaviour
         }
     }
 
-    public void CreateBug()
+	public void CreateBug()
+	{
+		if (CreatePossible())
+		{
+			int random = Random.Range(0, 3);
+			//Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3*platformWidth, newPlatform.transform.position.y + Random.Range(-1, 3) * (platformHeight+ platformDepth), 0), Quaternion.identity);
+
+			//여기서 부터 새로 작성한 코드
+			Vector3 platPosition = player.GetComponent<CharMovement>().SetPlatformPosition();
+
+			if (random == 0)
+			{
+				print("평평");
+				if (newPlatType == 0)
+					Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + Random.Range(-1, 3) * (platformHeight ), 0), Quaternion.identity);
+				else if (newPlatType == 1)
+					Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + platformDepth + Random.Range(-1, 3) * (platformHeight ), 0), Quaternion.identity);
+				else
+					Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y - platformDepth + Random.Range(-1, 3) * (platformHeight ), 0), Quaternion.identity);
+			}
+			else if (random == 1)
+			{
+				print("업");
+				if (newPlatType == 0)
+					Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + (platformHeight - platformDepth) + Random.Range(-1, 3) * (platformHeight ), 0), Quaternion.identity);
+				else if (newPlatType == 1)
+					Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + platformHeight + Random.Range(-1, 3) * (platformHeight ), 0), Quaternion.identity);
+				else
+					Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + (platformHeight - platformDepth - platformDepth) + Random.Range(-1, 3) * (platformHeight ), 0), Quaternion.identity);
+			}
+			else if (random == 2)
+			{
+				print("다운");
+				if (newPlatType == 0)
+					Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y - (platformHeight - platformDepth) + Random.Range(-1, 2) * (platformHeight ), 0), Quaternion.identity);
+				else if (newPlatType == 1)
+					Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y - (platformHeight - platformDepth - platformDepth) + Random.Range(-1, 2) * (platformHeight), 0), Quaternion.identity);
+				else
+					Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y - platformHeight + Random.Range(-1, 2) * (platformHeight), 0), Quaternion.identity);
+			}
+
+
+		}
+	}
+
+	public void CreateObstacle()
     {
         if (CreatePossible())
         {
-            if (newPlatType == 0)
-            {
-
-            }
-            else if (newPlatType == 1)
-            {
-
-            }
-            else
-            {
-
-            }
-
-            // 이하는 송충이 플랫폼 생성 코드 
-            /*
             int random = Random.Range(0, 3);
-            Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3*platformWidth, newPlatform.transform.position.y + Random.Range(-1, 3) * (platformHeight), 0), Quaternion.identity);
-            */     
-        }
-    }
-    
-    public void CreateObstacle()
-    {
-        if (CreatePossible())
-        {
-            int random = Random.Range(0, 3);
-            Instantiate(obstaclePrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + Random.Range(-1, 3) * (platformHeight + platformDepth), 0), Quaternion.identity);
+            Instantiate(obstaclePrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + Random.Range(-1, 2) * (platformHeight ), 0), Quaternion.identity);
         }
     }
 
