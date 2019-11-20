@@ -41,7 +41,7 @@ public class Canvas : MonoBehaviour
             else if (49 < random && random < 90)
             {
                 // 50 - 89
-                //platformLoad.GetComponent<PlatformLoader>().CreateObstacle();
+                platformLoad.GetComponent<PlatformLoader>().CreateObstacle();
             }
             else
             {
