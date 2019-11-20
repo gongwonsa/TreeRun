@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         //platform.Add(0);
         // hp = 100;
         print(DataManager.Instance.PlayerDie);
-        isOver = false;
+        //isOver = false;
         score = GameObject.Find("Score").GetComponent<Score>();
     }
 
@@ -31,16 +31,20 @@ public class GameManager : MonoBehaviour
             if(DataManager.Instance.playTimeCurrent <0)
             {
                 //DataManager.Instance.PlayerDie = true;
+                
                 PlayerDie();
             }
         }
+
+        
         
     }
 
     public void PlayerDie ()
     {
-        DataManager.Instance.PlayerDie = true;
-        print("게임 오버");
+        if (DataManager.Instance.PlayerDie == false)
+            DataManager.Instance.PlayerDie = true;
+        //print("게임 오버");
     }
 
   

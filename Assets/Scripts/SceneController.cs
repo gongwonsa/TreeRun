@@ -11,13 +11,16 @@ public class SceneController : MonoBehaviour
     void Start()
     {
         currenScene = SceneManager.GetActiveScene().name;
+        //print(currenScene);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
+            print(currenScene);
+            DataManager.Instance.PlayerDie = false;
             SceneManager.LoadScene(currenScene);
         }
     }

@@ -69,19 +69,19 @@ public class CharMovement : MonoBehaviour
             { 
                 // 캐릭터 움직임
                 //print(ray.collider.tag);
-                gameObject.transform.Translate(new Vector3(0.2f, 0.1f, 0) * speed * Time.deltaTime);
+                gameObject.transform.Translate(new Vector3(0.4f, 0.2f, 0) * speed * Time.deltaTime);
                 
             }
             else if (ray.collider.tag == "Down")
             {
                 // 캐릭터 움직임
-                gameObject.transform.Translate(new Vector3(0.2f,-0.1f, 0) * speed * Time.deltaTime);
+                gameObject.transform.Translate(new Vector3(0.4f,-0.2f, 0) * speed * Time.deltaTime);
                 
             }
             else
             {
                 // 캐릭터 움직임
-                gameObject.transform.Translate(new Vector3(0.2f, 0, 0) * speed *Time.deltaTime);
+                gameObject.transform.Translate(new Vector3(0.4f, 0, 0) * speed *Time.deltaTime);
             }
         } else
         {
