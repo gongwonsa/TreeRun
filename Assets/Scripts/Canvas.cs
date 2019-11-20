@@ -32,16 +32,16 @@ public class Canvas : MonoBehaviour
             platformLoad.GetComponent<PlatformLoader>().CreatePlatform(type);
             int random = Random.Range(0, 100);
 
-            if (random < 50)
+            if (random < 10)
             {
                 // 0 - 49
                 platformLoad.GetComponent<PlatformLoader>().CreateBug();
 
             }
-            else if (49 < random && random < 90)
+            else if (20 < random && random < 90)
             {
                 // 50 - 89
-                //platformLoad.GetComponent<PlatformLoader>().CreateObstacle();
+                platformLoad.GetComponent<PlatformLoader>().CreateObstacle();
             }
             else
             {
