@@ -68,7 +68,7 @@ public class PlatformLoader : MonoBehaviour
                 newPlatform = Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - (platformHeight), platPosition.z), Quaternion.identity);
         }
 
-        
+
     }
 
     bool CreatePossible ()
