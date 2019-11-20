@@ -31,7 +31,7 @@ public class CharMovement : MonoBehaviour
             Debug.DrawRay(currentPlatform.transform.position, new Vector3(1, 0, 0) * (((currentPlatform.GetComponent<RectTransform>().rect.width) / 2) + 3.0f), Color.black, 100.0f);
             if (Physics.Raycast(currentPlatform.transform.position, new Vector3(1, 0, 0), out ray, (((currentPlatform.GetComponent<RectTransform>().rect.width) / 2) + 3.0f)))
             {
-                print("여기다: " + ray.collider.gameObject.name);
+                //print("여기다: " + ray.collider.gameObject.name);
                 return false;
             } else
             {

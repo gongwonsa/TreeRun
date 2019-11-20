@@ -12,6 +12,7 @@ public class PlatformLoader : MonoBehaviour
     float platformHeight;
     float platformDepth;
     int prevPlatType;
+    int newPlatType;
     GameObject player;
     GameObject gameManager;
     GameObject newPlatform;
@@ -34,6 +35,7 @@ public class PlatformLoader : MonoBehaviour
     {
         Vector3 platPosition = player.GetComponent<CharMovement>().SetPlatformPosition();
         prevPlatType = player.GetComponent<CharMovement>().SetPrevPlatType();
+        newPlatType = type;
 
         if (type == 0 )
         {
@@ -94,8 +96,24 @@ public class PlatformLoader : MonoBehaviour
     {
         if (CreatePossible())
         {
+            if (newPlatType == 0)
+            {
+
+            }
+            else if (newPlatType == 1)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            // 이하는 송충이 플랫폼 생성 코드 
+            /*
             int random = Random.Range(0, 3);
             Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3*platformWidth, newPlatform.transform.position.y + Random.Range(-1, 3) * (platformHeight), 0), Quaternion.identity);
+            */     
         }
     }
     
