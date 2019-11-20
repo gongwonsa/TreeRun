@@ -141,7 +141,7 @@ public class PlatformLoader : MonoBehaviour
     {
         if (CreatePossible())
         {
-            int random = Random.Range(0, 2);
+            int random = Random.Range(0, 3);
 			// Instantiate(obstaclePrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + Random.Range(-1, 2) * (platformHeight ), 0), Quaternion.Euler(0,0,90));
 			if (random == 0)
 			{
@@ -153,7 +153,7 @@ public class PlatformLoader : MonoBehaviour
 			}
 			else
 			{
-				//Instantiate(obstaclePrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y, 0), Quaternion.Euler(0, 0, 90));
+				Instantiate(obstaclePrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y, 0), Quaternion.Euler(0, 0, 90));
 			}
 		}
     }
