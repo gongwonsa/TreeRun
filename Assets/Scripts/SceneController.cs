@@ -17,11 +17,22 @@ public class SceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            print(currenScene);
-            DataManager.Instance.PlayerDie = false;
-            SceneManager.LoadScene(currenScene);
-        }
-    }
+		
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			if (DataManager.Instance.PlayerDie == true)
+			{
+
+				print(currenScene);
+				SceneManager.LoadScene(currenScene);
+			}
+			DataManager.Instance.PlayerDie = false;
+			DataManager.Instance.score = 0.0f;
+		}
+	}
+
+	void gameoverpanel()
+	{ 
+
+	}
 }

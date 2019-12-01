@@ -13,6 +13,8 @@ public class CharMovement : MonoBehaviour
     GameManager gameManager;
 	SpriteRenderer renderer;
 	float score = 0f;
+	float deadtime = 0f;
+	bool deadtimebool = false;
 	bool isUnBearTime = true;
 
     // Start is called before the first frame update
@@ -58,7 +60,6 @@ public class CharMovement : MonoBehaviour
 		{
 			StartCoroutine("UnBeatTime");
 
-			print(" 깜박여라 제발");
 		}
 
 	}
@@ -103,6 +104,11 @@ public class CharMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+		if (deadtimebool == true)
+		{
+			deadtime += Time.deltaTime;
+		}
+
         RaycastHit ray;
 		Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1.0f, Color.green, 100.0f);
 		score = DataManager.Instance.score;
@@ -124,23 +130,31 @@ public class CharMovement : MonoBehaviour
                 // 캐릭터 움직임
                 //print(ray.collider.tag);
                 gameObject.transform.Translate(new Vector3(0.4f, 0.2f, 0) * speed * Time.deltaTime);
-                
-            }
+				deadtime = 0.0f;
+
+			}
             else if (ray.collider.tag == "Down")
             {
                 // 캐릭터 움직임
                 gameObject.transform.Translate(new Vector3(0.4f,-0.2f, 0) * speed * Time.deltaTime);
-                
-            }
+				deadtime = 0.0f;
+
+			}
             else
             {
                 // 캐릭터 움직임
                 gameObject.transform.Translate(new Vector3(0.4f, 0, 0) * speed *Time.deltaTime);
-            }
+				deadtime = 0.0f;
+			}
         } else
         {
             gameObject.transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
-            gameManager.PlayerDie();
+			deadtimebool = true;
+			if (deadtime > 3.0f)
+			{
+				gameManager.PlayerDie();
+				deadtime = 0.0f;
+			}
         }
 
     }

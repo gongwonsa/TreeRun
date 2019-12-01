@@ -15,11 +15,11 @@ public class Score : MonoBehaviour
         gameManager = GameObject.Find("GameManager");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        ScoreText.text = "Score: "+ score.ToString();
-    }
+	// Update is called once per frame
+	void Update()
+	{
+		ScoreText.text = "Score: " + score.ToString();
+	}
 
     public void GetScore()
     {
