@@ -6,10 +6,12 @@ public class ObjectManager : MonoBehaviour
 {
     Camera mainCamera;
     GameObject platformLoad;
+    GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
         mainCamera = Camera.main;
         platformLoad = GameObject.Find("PlatformLoad");
     }
@@ -17,7 +19,7 @@ public class ObjectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mainCamera.WorldToScreenPoint(transform.position).x < -(platformLoad.GetComponent<PlatformLoader>().SetWidth()))
+        if (transform.position.x < player.transform.position.x - 2 * platformLoad.GetComponent<PlatformLoader>().SetWidth())
         {
             Destroy(gameObject);
         }

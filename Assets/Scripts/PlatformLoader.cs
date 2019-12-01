@@ -26,7 +26,7 @@ public class PlatformLoader : MonoBehaviour
         platformDepth = platformPrefabs[0].GetComponent<RectTransform>().rect.height * 1.85f;
         platformHeight = Mathf.Abs(platformPrefabs[1].transform.GetChild(0).transform.position.y - platformPrefabs[1].transform.GetChild(2).transform.position.y);
 
-        print("너비: " + platformWidth);
+        //print("너비: " + platformWidth);
 
     }
 
@@ -39,7 +39,7 @@ public class PlatformLoader : MonoBehaviour
 
         if (type == 0 )
         {
-            print("평평");
+            //print("평평");
             if (prevPlatType == 0)
                 newPlatform = Instantiate(platformPrefabs[(int)platformList.Flat], new Vector3(platPosition.x + platformWidth, platPosition.y, platPosition.z), Quaternion.identity);
             else if (prevPlatType == 1)
@@ -49,7 +49,7 @@ public class PlatformLoader : MonoBehaviour
         }
         else if (type == 1)
         {
-            print("업");
+            //print("업");
             if (prevPlatType == 0)
                 newPlatform = Instantiate(platformPrefabs[(int)platformList.Up], new Vector3(platPosition.x + platformWidth, platPosition.y + (platformHeight - platformDepth), platPosition.z), Quaternion.identity);
             else if (prevPlatType == 1)
@@ -59,7 +59,7 @@ public class PlatformLoader : MonoBehaviour
         }
         else if (type == 2)
         {
-            print("다운");
+            //print("다운");
             if (prevPlatType == 0)
                 newPlatform = Instantiate(platformPrefabs[(int)platformList.Down], new Vector3(platPosition.x + platformWidth, platPosition.y - (platformHeight - platformDepth), platPosition.z), Quaternion.identity);
             else if (prevPlatType == 1)
@@ -104,7 +104,7 @@ public class PlatformLoader : MonoBehaviour
 
 			if (random == 0)
 			{
-				print("평평");
+				//print("평평");
 				if (newPlatType == 0)
 					Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + Random.Range(-1, 3) * (platformHeight ), 0), Quaternion.identity);
 				else if (newPlatType == 1)
@@ -114,7 +114,7 @@ public class PlatformLoader : MonoBehaviour
 			}
 			else if (random == 1)
 			{
-				print("업");
+				//print("업");
 				if (newPlatType == 0)
 					Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + (platformHeight - platformDepth) + Random.Range(-1, 3) * (platformHeight ), 0), Quaternion.identity);
 				else if (newPlatType == 1)
@@ -124,7 +124,7 @@ public class PlatformLoader : MonoBehaviour
 			}
 			else if (random == 2)
 			{
-				print("다운");
+				//print("다운");
 				if (newPlatType == 0)
 					Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y - (platformHeight - platformDepth) + Random.Range(-1, 2) * (platformHeight ), 0), Quaternion.identity);
 				else if (newPlatType == 1)
