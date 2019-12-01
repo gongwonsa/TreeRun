@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba6a930a5da4a744dabc58cbe23b9c71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1001 &52850176243993328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -180,7 +180,7 @@ PrefabInstance:
     - target: {fileID: 4719293158936669337, guid: 0dac4296afcf41344b6071a65055c65a,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dac4296afcf41344b6071a65055c65a, type: 3}
@@ -325,7 +325,7 @@ PrefabInstance:
     - target: {fileID: 696687153487011107, guid: 0dac4296afcf41344b6071a65055c65a,
         type: 3}
       propertyPath: m_Sprite
-      value: 
+      value:
       objectReference: {fileID: 21300000, guid: 236cb3c30698426419d31ada7afa7f53,
         type: 3}
     - target: {fileID: 4719293158936669337, guid: 0dac4296afcf41344b6071a65055c65a,
@@ -356,7 +356,7 @@ PrefabInstance:
     - target: {fileID: 4719293158936669337, guid: 0dac4296afcf41344b6071a65055c65a,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dac4296afcf41344b6071a65055c65a, type: 3}
