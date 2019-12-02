@@ -13,13 +13,15 @@ public class CharMovement : MonoBehaviour
     GameManager gameManager;
 	SpriteRenderer renderer;
 	float score = 0f;
+	float deadtime = 0f;
+	bool deadtimebool = false;
 	bool isUnBearTime = true;
     float dieTime = 2f;
 
     // Start is called before the first frame update
     void Start()
 	{
-		
+
 		renderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
 		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = gameObject.GetComponent<Rigidbody>();
@@ -37,7 +39,7 @@ public class CharMovement : MonoBehaviour
 
         while (countTime < 6)
 		{
-	
+
 			if (countTime % 2 == 0)
 				obj.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
 			else
@@ -49,7 +51,7 @@ public class CharMovement : MonoBehaviour
 
 		}
 
-		
+
 		renderer.color = new Color32(255, 255, 255, 255);
 
         if (obj.transform.parent.tag == "Obstacle")
@@ -71,7 +73,7 @@ public class CharMovement : MonoBehaviour
 			print(" 깜박여라 제발");
 		} else if (other.gameObject.name == "BugCollider") {
             print(other.gameObject.transform.parent.GetChild(0).tag);
-            
+
 
             if (other.gameObject.transform.parent.GetChild(0).tag == "FlatPlatform")
             {
@@ -91,13 +93,13 @@ public class CharMovement : MonoBehaviour
 
 
 
-    // 플레이어가 밟고 있는 플랫폼 다음에 다른 길이 있는 지 확인 
-    // 플레이어가 밟고 있는 플랫폼 다음에 다른 길이 있는 지 확인 
+    // 플레이어가 밟고 있는 플랫폼 다음에 다른 길이 있는 지 확인
+    // 플레이어가 밟고 있는 플랫폼 다음에 다른 길이 있는 지 확인
     public bool isExistPlatform() {
 
         RaycastHit ray;
         print(currentPlatform.tag);
-        
+
         if (currentPlatform.tag == "FlatPlatform")
         {
             Debug.DrawRay(currentPlatform.transform.position, new Vector3(1, 0, 0) * (((currentPlatform.GetComponent<RectTransform>().rect.width) / 2) + 3.0f), Color.black, 100.0f);
@@ -130,6 +132,11 @@ public class CharMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+		if (deadtimebool == true)
+		{
+			deadtime += Time.deltaTime;
+		}
+
         RaycastHit ray;
 		Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1.5f, Color.green, 100.0f);
 		score = DataManager.Instance.score;
@@ -142,33 +149,40 @@ public class CharMovement : MonoBehaviour
 		if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out ray, 1.5f))
         {
 
-            // 현재 밟고 있는 플랫폼의 종류와 오브젝트 이름 
+            // 현재 밟고 있는 플랫폼의 종류와 오브젝트 이름
             //platform.Insert(0, ray.collider.gameObject.transform.parent.tag);
             currentPlatform = ray.collider.gameObject;
 
             if (ray.collider.tag == "Up")
-            { 
+            {
                 // 캐릭터 움직임
                 //print(ray.collider.tag);
                 gameObject.transform.Translate(new Vector3(0.4f, 0.2f, 0) * speed * Time.deltaTime);
-                
-            }
+				deadtime = 0.0f;
+
+			}
             else if (ray.collider.tag == "Down")
             {
                 // 캐릭터 움직임
                 gameObject.transform.Translate(new Vector3(0.4f,-0.2f, 0) * speed * Time.deltaTime);
-                
-            }
+				deadtime = 0.0f;
+
+			}
             else
             {
                 // 캐릭터 움직임
                 gameObject.transform.Translate(new Vector3(0.4f, 0, 0) * speed *Time.deltaTime);
-            }
+				deadtime = 0.0f;
+			}
         } else
         {
-            print("dldldldl");
-            gameObject.transform.Translate(new Vector3(0.2f, -5f, 0)* Time.deltaTime);
-            //isFallDown();
+            gameObject.transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+			deadtimebool = true;
+			if (deadtime > 3.0f)
+			{
+				gameManager.PlayerDie();
+				deadtime = 0.0f;
+			}
         }
 
     }
@@ -179,23 +193,23 @@ public class CharMovement : MonoBehaviour
         RaycastHit ray;
 
         if ((Physics.Raycast(transform.position, new Vector3(0, -1f, 0), out ray, 7.0f) == false)) {
-            
+
             print("엉엉");
             gameManager.PlayerDie();
         } else
         {
 
-            
+
             if(ray.collider.tag == "Obstacle")
             {
                 print("떨어질때ㅐㅐㅐㅐㅐ");
                 gameManager.PlayerDie();
             }
         }
-    } 
+    }
 
     public Vector3 SetPlatformPosition()
-    { 
+    {
         if (currentPlatform.tag == "FlatPlatform")
             return currentPlatform.transform.position;
         else
@@ -219,5 +233,5 @@ public class CharMovement : MonoBehaviour
         }
     }
 
-    
+
 }
