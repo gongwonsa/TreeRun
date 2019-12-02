@@ -32,6 +32,7 @@ public class CharMovement : MonoBehaviour
 	{
 		int countTime = 0;
 
+        print(obj.tag);
         if (obj.tag != "Player")
         {
             Destroy(obj.transform.parent.GetChild(1).gameObject);
@@ -54,10 +55,10 @@ public class CharMovement : MonoBehaviour
 
 		renderer.color = new Color32(255, 255, 255, 255);
 
-        if (obj.transform.parent.tag == "Obstacle")
-        {
-            Destroy(obj);
-        }
+        //if (obj.transform.parent.tag == "Obstacle")
+        //{
+        //    Destroy(obj);
+        //}
 
 		isUnBearTime = false;
 
@@ -68,7 +69,7 @@ public class CharMovement : MonoBehaviour
 	{
 		if (other.gameObject.tag == "Obstacle")
 		{
-			StartCoroutine("UnBeatTime", this.gameObject);
+			StartCoroutine("UnBeatTime", gameObject);
 
 			print(" 깜박여라 제발");
 		} else if (other.gameObject.name == "BugCollider") {
@@ -176,7 +177,7 @@ public class CharMovement : MonoBehaviour
 			}
         } else
         {
-            gameObject.transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+            gameObject.transform.Translate(new Vector3(0.2f, -10f, 0) * Time.deltaTime);
 			deadtimebool = true;
 			if (deadtime > 3.0f)
 			{
