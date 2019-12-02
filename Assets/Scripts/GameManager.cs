@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         if (DataManager.Instance.PlayerDie == false)
             DataManager.Instance.PlayerDie = true;
-        //print("게임 오버");
+        print("게임 오버");
     }
 
   

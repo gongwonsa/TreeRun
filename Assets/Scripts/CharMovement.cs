@@ -14,6 +14,7 @@ public class CharMovement : MonoBehaviour
 	SpriteRenderer renderer;
 	float score = 0f;
 	bool isUnBearTime = true;
+    float dieTime = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,18 +26,22 @@ public class CharMovement : MonoBehaviour
         camera = Camera.main;
 
     }
-	IEnumerator UnBeatTime()
+	IEnumerator UnBeatTime(GameObject obj)
 	{
 		int countTime = 0;
 
-		while (countTime < 6)
+        if (obj.tag != "Player")
+        {
+            Destroy(obj.transform.parent.GetChild(1).gameObject);
+        }
+
+        while (countTime < 6)
 		{
 	
 			if (countTime % 2 == 0)
-
-				renderer.color = new Color32(255, 255, 255, 90);
+				obj.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
 			else
-				renderer.color = new Color32(255, 255, 255, 180);
+				obj.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 180);
 
 			yield return new WaitForSeconds(0.3f);
 
@@ -47,6 +52,11 @@ public class CharMovement : MonoBehaviour
 		
 		renderer.color = new Color32(255, 255, 255, 255);
 
+        if (obj.transform.parent.tag == "Obstacle")
+        {
+            Destroy(obj);
+        }
+
 		isUnBearTime = false;
 
 		yield return null;
@@ -56,20 +66,34 @@ public class CharMovement : MonoBehaviour
 	{
 		if (other.gameObject.tag == "Obstacle")
 		{
-			StartCoroutine("UnBeatTime");
+			StartCoroutine("UnBeatTime", this.gameObject);
 
 			print(" 깜박여라 제발");
-		}
+		} else if (other.gameObject.name == "BugCollider") {
+            print(other.gameObject.transform.parent.GetChild(0).tag);
+            
+
+            if (other.gameObject.transform.parent.GetChild(0).tag == "FlatPlatform")
+            {
+                StartCoroutine("UnBeatTime", other.gameObject.transform.parent.GetChild(0).gameObject);
+                other.gameObject.transform.parent.GetChild(0).GetComponent<BoxCollider>().isTrigger = true;
+            }
+            else
+            {
+                StartCoroutine("UnBeatTime", other.gameObject.transform.parent.GetChild(0).gameObject);
+                other.gameObject.transform.parent.GetChild(0).GetChild(0).GetComponent<BoxCollider>().isTrigger = true;
+                other.gameObject.transform.parent.GetChild(0).GetChild(1).GetComponent<BoxCollider>().isTrigger = true;
+                other.gameObject.transform.parent.GetChild(0).GetChild(2).GetComponent<BoxCollider>().isTrigger = true;
+            }
+        }
 
 	}
 
 
 
-
-
-	// 플레이어가 밟고 있는 플랫폼 다음에 다른 길이 있는 지 확인 
-	// 플레이어가 밟고 있는 플랫폼 다음에 다른 길이 있는 지 확인 
-	public bool isExistPlatform() {
+    // 플레이어가 밟고 있는 플랫폼 다음에 다른 길이 있는 지 확인 
+    // 플레이어가 밟고 있는 플랫폼 다음에 다른 길이 있는 지 확인 
+    public bool isExistPlatform() {
 
         RaycastHit ray;
         print(currentPlatform.tag);
@@ -86,10 +110,10 @@ public class CharMovement : MonoBehaviour
                 //print(ray.collider.gameObject.name);
                 return true;
             }
-        } else
+        } else if (currentPlatform.transform.parent.tag == "UpPlatform" || currentPlatform.transform.parent.tag == "DownPlatform")
         {
             Debug.DrawRay(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0) * (((currentPlatform.transform.parent.transform.GetChild(2).GetComponent<RectTransform>().rect.width) / 2) + 0.5f), Color.red, 100.0f);
-            if (Physics.Raycast(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0), out ray, (((currentPlatform.transform.parent.transform.GetChild(2).GetComponent<RectTransform>().rect.width) / 2) + 0.5f)))
+            if (Physics.Raycast(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0), out ray, (((currentPlatform.transform.parent.GetChild(2).GetComponent<RectTransform>().rect.width) / 2) + 0.5f)))
             {
                 print("여기다: " + ray.collider.gameObject.name);
                 return false;
@@ -97,6 +121,9 @@ public class CharMovement : MonoBehaviour
             {
                 return true;
             }
+        } else
+        {
+            return false;
         }
 
     }
@@ -104,7 +131,7 @@ public class CharMovement : MonoBehaviour
     private void FixedUpdate()
     {
         RaycastHit ray;
-		Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1.0f, Color.green, 100.0f);
+		Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1.5f, Color.green, 100.0f);
 		score = DataManager.Instance.score;
 		if (score % 10 < 1)
 		{
@@ -112,7 +139,7 @@ public class CharMovement : MonoBehaviour
 		}
 
 
-		if (Physics.Raycast(transform.position, new Vector3(0, -1, 0) * 0.5f, out ray))
+		if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out ray, 1.5f))
         {
 
             // 현재 밟고 있는 플랫폼의 종류와 오브젝트 이름 
@@ -139,11 +166,33 @@ public class CharMovement : MonoBehaviour
             }
         } else
         {
-            gameObject.transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
-            gameManager.PlayerDie();
+            print("dldldldl");
+            gameObject.transform.Translate(new Vector3(0.2f, -5f, 0)* Time.deltaTime);
+            //isFallDown();
         }
 
     }
+
+    void isFallDown()
+    {
+        Debug.DrawRay(new Vector3(transform.position.x + 1.0f, transform.position.y, transform.position.z), new Vector3(0, -7, 0), Color.red, 100.0f);
+        RaycastHit ray;
+
+        if ((Physics.Raycast(transform.position, new Vector3(0, -1f, 0), out ray, 7.0f) == false)) {
+            
+            print("엉엉");
+            gameManager.PlayerDie();
+        } else
+        {
+
+            
+            if(ray.collider.tag == "Obstacle")
+            {
+                print("떨어질때ㅐㅐㅐㅐㅐ");
+                gameManager.PlayerDie();
+            }
+        }
+    } 
 
     public Vector3 SetPlatformPosition()
     { 

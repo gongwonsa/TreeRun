@@ -96,7 +96,7 @@ public class PlatformLoader : MonoBehaviour
 	{
 		if (CreatePossible())
 		{
-			int random = Random.Range(0, 3);
+			int random = Random.Range(0,3);
 			//Instantiate(bugPrefabs[random], new Vector3(newPlatform.transform.position.x + 3*platformWidth, newPlatform.transform.position.y + Random.Range(-1, 3) * (platformHeight+ platformDepth), 0), Quaternion.identity);
 
 			//여기서 부터 새로 작성한 코드
