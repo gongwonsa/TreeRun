@@ -10,9 +10,10 @@ public class CharMovement : MonoBehaviour
     string prevPlatformName;
     string currentPlatformName;
     GameObject currentPlatform;
-    GameManager gameManager;
+    GameObject gameManager;
 	SpriteRenderer renderer;
-	float score = 0f;
+    Score scoreObj;
+    //int score = 0f;
 	float deadtime = 0f;
 	bool deadtimebool = false;
 	bool isUnBearTime = true;
@@ -23,12 +24,81 @@ public class CharMovement : MonoBehaviour
 	{
 
 		renderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
-		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		gameManager = GameObject.Find("GameManager");
         rb = gameObject.GetComponent<Rigidbody>();
+        scoreObj = GameObject.Find("Score").GetComponent<Score>();
         camera = Camera.main;
+        print("start5");
 
     }
-	IEnumerator UnBeatTime(GameObject obj)
+    
+    private void FixedUpdate()
+    {
+        if (deadtimebool == true)
+        {
+            deadtime += Time.deltaTime;
+        }
+
+        
+        RaycastHit ray;
+        Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1.5f, Color.green, 100.0f);
+
+        if (scoreObj.GetScore() % 10 < 1)
+        {
+            speed += 0.02f;
+        }
+
+
+        if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out ray, 1.5f))
+        {
+
+            // 현재 밟고 있는 플랫폼의 종류와 오브젝트 이름
+            //platform.Insert(0, ray.collider.gameObject.transform.parent.tag);
+            currentPlatform = ray.collider.gameObject;
+
+            if (ray.collider.tag == "Up")
+            {
+                // 캐릭터 움직임
+                //print(ray.collider.tag);
+                print("1");
+                gameObject.transform.Translate(new Vector3(0.4f, 0.2f, 0) * speed * Time.deltaTime);
+                deadtime = 0.0f;
+
+            }
+            else if (ray.collider.tag == "Down")
+            {
+                // 캐릭터 움직임
+                print("2");
+                gameObject.transform.Translate(new Vector3(0.4f, -0.2f, 0) * speed * Time.deltaTime);
+                deadtime = 0.0f;
+
+            }
+            else
+            {
+                // 캐릭터 움직임
+                print("3");
+                gameObject.transform.Translate(new Vector3(0.4f, 0, 0) * speed * Time.deltaTime);
+                deadtime = 0.0f;
+            }
+        }
+        else
+        {
+            gameObject.transform.Translate(new Vector3(0.2f, -10f, 0) * Time.deltaTime);
+            deadtimebool = true;
+            print("4");
+            if (deadtime > 3.0f)
+            {
+                print("5");
+                gameManager.GetComponent<GameManager>().PlayerDie();
+                deadtime = 0.0f;
+            }
+        }
+
+    }
+
+
+
+    IEnumerator UnBeatTime(GameObject obj)
 	{
 		int countTime = 0;
 
@@ -113,7 +183,11 @@ public class CharMovement : MonoBehaviour
                 //print(ray.collider.gameObject.name);
                 return true;
             }
-        } else if (currentPlatform.transform.parent.tag == "UpPlatform" || currentPlatform.transform.parent.tag == "DownPlatform")
+        } else if (currentPlatform.tag == "Obstacle")
+        {
+            return false;
+        }
+        else if (currentPlatform.transform.parent.tag == "UpPlatform" || currentPlatform.transform.parent.tag == "DownPlatform")
         {
             Debug.DrawRay(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0) * (((currentPlatform.transform.parent.transform.GetChild(2).GetComponent<RectTransform>().rect.width) / 2) + 0.5f), Color.red, 100.0f);
             if (Physics.Raycast(currentPlatform.transform.parent.GetChild(2).transform.position, new Vector3(1, 0, 0), out ray, (((currentPlatform.transform.parent.GetChild(2).GetComponent<RectTransform>().rect.width) / 2) + 0.5f)))
@@ -131,63 +205,7 @@ public class CharMovement : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-    {
-		if (deadtimebool == true)
-		{
-			deadtime += Time.deltaTime;
-		}
-
-        RaycastHit ray;
-		Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1.5f, Color.green, 100.0f);
-		score = DataManager.Instance.score;
-		if (score % 10 < 1)
-		{
-			speed += 0.02f;
-		}
-
-
-		if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out ray, 1.5f))
-        {
-
-            // 현재 밟고 있는 플랫폼의 종류와 오브젝트 이름
-            //platform.Insert(0, ray.collider.gameObject.transform.parent.tag);
-            currentPlatform = ray.collider.gameObject;
-
-            if (ray.collider.tag == "Up")
-            {
-                // 캐릭터 움직임
-                //print(ray.collider.tag);
-                gameObject.transform.Translate(new Vector3(0.4f, 0.2f, 0) * speed * Time.deltaTime);
-				deadtime = 0.0f;
-
-			}
-            else if (ray.collider.tag == "Down")
-            {
-                // 캐릭터 움직임
-                gameObject.transform.Translate(new Vector3(0.4f,-0.2f, 0) * speed * Time.deltaTime);
-				deadtime = 0.0f;
-
-			}
-            else
-            {
-                // 캐릭터 움직임
-                gameObject.transform.Translate(new Vector3(0.4f, 0, 0) * speed *Time.deltaTime);
-				deadtime = 0.0f;
-			}
-        } else
-        {
-            gameObject.transform.Translate(new Vector3(0.2f, -10f, 0) * Time.deltaTime);
-			deadtimebool = true;
-			if (deadtime > 3.0f)
-			{
-				gameManager.PlayerDie();
-				deadtime = 0.0f;
-			}
-        }
-
-    }
-
+   
     void isFallDown()
     {
         Debug.DrawRay(new Vector3(transform.position.x + 1.0f, transform.position.y, transform.position.z), new Vector3(0, -7, 0), Color.red, 100.0f);
@@ -196,7 +214,7 @@ public class CharMovement : MonoBehaviour
         if ((Physics.Raycast(transform.position, new Vector3(0, -1f, 0), out ray, 7.0f) == false)) {
 
             print("엉엉");
-            gameManager.PlayerDie();
+            gameManager.GetComponent<GameManager>().PlayerDie();
         } else
         {
 
@@ -204,7 +222,7 @@ public class CharMovement : MonoBehaviour
             if(ray.collider.tag == "Obstacle")
             {
                 print("떨어질때ㅐㅐㅐㅐㅐ");
-                gameManager.PlayerDie();
+                gameManager.GetComponent<GameManager>().PlayerDie();
             }
         }
     }

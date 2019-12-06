@@ -7,27 +7,36 @@ public class GameManager : MonoBehaviour
 {
 
     public Image Timebar;
-    public bool isOver;
+    public bool playerDie;
 	public GameObject resultPanel;
+    DataManager data;
     Score score;
+    public float playTimeCurrent = 10;
+    public float playTimeMax = 10;
 
     // Start is called before the first frame update
     void Start()
     {
-		resultPanel.SetActive(false);
-        print(DataManager.Instance.PlayerDie);
+        playerDie = false;
+        playTimeCurrent = 10;
+        resultPanel.SetActive(false);
+        //DataManager data = GameObject.Find("DataManager").GetComponent<DataManager>();
         score = GameObject.Find("Score").GetComponent<Score>();
+        Time.timeScale = 1.0f;
+        print("start2");
     }
 
     void Update()
     {
-        if (DataManager.Instance.PlayerDie == false)
+        if (playerDie == false)
         {
-            DataManager.Instance.playTimeCurrent -= 0.2f * Time.deltaTime;
-            Timebar.fillAmount = DataManager.Instance.playTimeCurrent / DataManager.Instance.playTimeMax;
-            score.GetScore();
+            print("아앙");
+            playTimeCurrent -= 0.2f * Time.deltaTime;
+            Timebar.fillAmount = playTimeCurrent / playTimeMax;
+            //score.AddScore(40* Time.deltaTime);
+            print("아앙");
 
-            if(DataManager.Instance.playTimeCurrent <=0)
+            if (playTimeCurrent <=0)
             {
                // DataManager.Instance.PlayerDie = true;
 
@@ -35,7 +44,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-		if (DataManager.Instance.PlayerDie == true)
+		if (playerDie == true)
 		{
 			GameOver();
 		}
@@ -44,7 +53,17 @@ public class GameManager : MonoBehaviour
 
 	}
 
-	void GameOver()
+    private void FixedUpdate()
+    {
+
+        if (playerDie == false)
+        {
+            print("어째서");
+            score.AddScore(4 * Time.deltaTime);
+        }
+    }
+
+    void GameOver()
 	{
 		print("게임오버");
 		resultPanel.SetActive(true);
@@ -54,10 +73,10 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void PlayerDie ()
-    {
-        if (DataManager.Instance.PlayerDie == false)
-            DataManager.Instance.PlayerDie = true;
-        print("게임 오버");
+    {   
+        if (playerDie == false)
+            playerDie = true;
+        //print("게임 오버");
     }
 
 

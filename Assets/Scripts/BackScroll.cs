@@ -25,6 +25,7 @@ public class BackScroll : MonoBehaviour
         player = GameObject.Find("Player");
         backWidth = this.transform.GetChild(0).GetComponent<RectTransform>().rect.width * 2.19f;
         backHeight = this.transform.GetChild(0).GetComponent<RectTransform>().rect.height * 1.9f;
+        print("start4");
     }
 
     // Update is called once per frame
@@ -55,7 +56,7 @@ public class BackScroll : MonoBehaviour
         if (this.transform.position.y > player.transform.position.y - backHeight/* *2*/ && this.transform.position.y < player.transform.position.y + backHeight/* * 2*/)
         {
             // x축으로 새로운 배경 만들기
-            if (cnt_x == 0 && transform.position.x < player.transform.position.x + backWidth)
+            if (cnt_x == 0 && transform.position.x < player.transform.position.x + backWidth*2f)
             {
                 cnt_x++;
                 print("평");

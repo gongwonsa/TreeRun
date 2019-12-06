@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     string currenScene;
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         currenScene = SceneManager.GetActiveScene().name;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        print("start7");
         //print(currenScene);
     }
 
@@ -20,14 +23,13 @@ public class SceneController : MonoBehaviour
 		
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			if (DataManager.Instance.PlayerDie == true)
+			if (gameManager.playerDie == true)
 			{
 
 				print(currenScene);
-				SceneManager.LoadScene(currenScene);
+				SceneManager.LoadScene("SampleScene");
 			}
-			DataManager.Instance.PlayerDie = false;
-			DataManager.Instance.score = 0.0f;
+			
 		}
 	}
 

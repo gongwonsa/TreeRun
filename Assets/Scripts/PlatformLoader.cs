@@ -25,7 +25,7 @@ public class PlatformLoader : MonoBehaviour
         platformWidth = platformPrefabs[0].GetComponent<RectTransform>().rect.width * 1.85f;
         platformDepth = platformPrefabs[0].GetComponent<RectTransform>().rect.height * 1.85f;
         platformHeight = Mathf.Abs(platformPrefabs[1].transform.GetChild(0).transform.position.y - platformPrefabs[1].transform.GetChild(2).transform.position.y);
-
+        print("start3");
         //print("너비: " + platformWidth);
 
     }

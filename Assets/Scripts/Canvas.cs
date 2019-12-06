@@ -14,19 +14,19 @@ public class Canvas : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GameObject.Find("Player");
         platformLoad = GameObject.Find("PlatformLoad");
-        
+        print("start1");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        print("아");
     }
 
     public void SetPlatformType(int type)
     {
         // 현재 밟고 있는 플랫폼 앞에 다른 길이 있는 지 확인 
-        if (player.GetComponent<CharMovement>().isExistPlatform() && DataManager.Instance.PlayerDie == false)
+        if (player.GetComponent<CharMovement>().isExistPlatform() && gameManager.playerDie == false)
         { 
             print("어억");
             platformLoad.GetComponent<PlatformLoader>().CreatePlatform(type);

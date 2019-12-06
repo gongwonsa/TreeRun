@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class Bug : MonoBehaviour
 {
+    GameManager gameManager;
+    Score scoreObj;
+
+    void Start ()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        scoreObj = GameObject.Find("Score").GetComponent<Score>();
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (!DataManager.Instance.PlayerDie)
+        if (!gameManager.playerDie)
         {
             if (other.name == "Player")
             {
-                DataManager.Instance.playTimeCurrent += 2f;
-                DataManager.Instance.score += 10;
+                gameManager.playTimeCurrent += 2f;
+                scoreObj.AddScore(500);
 
-                if (DataManager.Instance.playTimeCurrent > DataManager.Instance.playTimeMax)
+                if (gameManager.playTimeCurrent > gameManager.playTimeMax)
                 {
-                    DataManager.Instance.playTimeCurrent = DataManager.Instance.playTimeMax;
+                    gameManager.playTimeCurrent = gameManager.playTimeMax;
                 }
                 gameObject.SetActive(false);
             }

@@ -7,24 +7,31 @@ public class Score : MonoBehaviour
 {
     public Text ScoreText;
     GameObject gameManager;
-    int score;
+    int updateScore = 4;
+    float score;
 
     // Start is called before the first frame update
     void Start()
     {
+        score = 0;
         gameManager = GameObject.Find("GameManager");
     }
 
 	// Update is called once per frame
 	void Update()
 	{
-		ScoreText.text = "Score: " + score.ToString();
+		ScoreText.text = "Score: " + Mathf.FloorToInt(score);
 	}
 
-    public void GetScore()
+    public void AddScore(float update)
     {
-        DataManager.Instance.score = DataManager.Instance.score + 4 * Time.deltaTime;
-        score =  Mathf.FloorToInt(DataManager.Instance.score);
+        print(Time.deltaTime);
+        score += update;
         
+    }
+
+    public float GetScore()
+    {
+        return score;
     }
 }

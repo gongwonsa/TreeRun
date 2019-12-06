@@ -4,41 +4,47 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    static DataManager instance;
+    //public static DataManager instance;
 
-    public float score = 0f;
-    public float playTimeCurrent = 10f;
-    public float playTimeMax = 10;
-    public bool PlayerDie = false;
+    //public float score;
+    //public float playTimeCurrent;
+    //public float playTimeMax = 10;
+    //public bool PlayerDie;
 
-    public static DataManager Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    //private void Start()
+    //{
+    //    score = 0;
+    //    PlayerDie = false;
+    //    playTimeCurrent = 10f;
+    //}
 
-    private void Awake()
-    {
-        if (instance ==null)
-        {
-            DontDestroyOnLoad(gameObject);
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    //void Update()
+    //{
+    //    if(PlayerDie == true)
+    //    {
+    //        Destroy(this.gameObject);
+    //    }
+    //}
 
-    void Start()
-    {
-        
-    }
+    ////public static DataManager Instance
+    ////{
+    ////    get
+    ////    {
+    ////        return instance;
+    ////    }
+    ////}
 
-    void Update()
-    {
-        
-    }
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        //DontDestroyOnLoad(gameObject);
+    //        DataManager.instance = this;
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
 }
