@@ -31,15 +31,16 @@ public class CharMovement : MonoBehaviour
         print("start5");
 
     }
-    
-    private void FixedUpdate()
+
+    private void Update()
     {
+
         if (deadtimebool == true)
         {
             deadtime += Time.deltaTime;
         }
 
-        
+
         RaycastHit ray;
         Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1.5f, Color.green, 100.0f);
 
@@ -61,7 +62,7 @@ public class CharMovement : MonoBehaviour
                 // 캐릭터 움직임
                 //print(ray.collider.tag);
                 print("1");
-                gameObject.transform.Translate(new Vector3(0.4f, 0.2f, 0) * speed * Time.deltaTime);
+                gameObject.transform.Translate(new Vector3(0.4f * speed * Time.smoothDeltaTime, 0.2f * speed * Time.smoothDeltaTime, 0));
                 deadtime = 0.0f;
 
             }
@@ -69,7 +70,7 @@ public class CharMovement : MonoBehaviour
             {
                 // 캐릭터 움직임
                 print("2");
-                gameObject.transform.Translate(new Vector3(0.4f, -0.2f, 0) * speed * Time.deltaTime);
+                gameObject.transform.Translate(new Vector3(0.4f * speed * Time.smoothDeltaTime, -0.2f * speed * Time.smoothDeltaTime, 0));
                 deadtime = 0.0f;
 
             }
@@ -77,13 +78,13 @@ public class CharMovement : MonoBehaviour
             {
                 // 캐릭터 움직임
                 print("3");
-                gameObject.transform.Translate(new Vector3(0.4f, 0, 0) * speed * Time.deltaTime);
+                gameObject.transform.Translate(new Vector3(0.4f * speed * Time.smoothDeltaTime, 0, 0));
                 deadtime = 0.0f;
             }
         }
         else
         {
-            gameObject.transform.Translate(new Vector3(0.2f, -10f, 0) * Time.deltaTime);
+            gameObject.transform.Translate(new Vector3(0.2f * Time.smoothDeltaTime, -10f * Time.smoothDeltaTime, 0 * Time.smoothDeltaTime));
             deadtimebool = true;
             print("4");
             if (deadtime > 3.0f)
@@ -93,6 +94,10 @@ public class CharMovement : MonoBehaviour
                 deadtime = 0.0f;
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
 
     }
 

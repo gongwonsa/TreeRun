@@ -30,11 +30,9 @@ public class GameManager : MonoBehaviour
     {
         if (playerDie == false)
         {
-            print("아앙");
             playTimeCurrent -= 0.2f * Time.deltaTime;
             Timebar.fillAmount = playTimeCurrent / playTimeMax;
             //score.AddScore(40* Time.deltaTime);
-            print("아앙");
 
             if (playTimeCurrent <=0)
             {

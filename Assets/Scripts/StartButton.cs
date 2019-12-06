@@ -13,7 +13,7 @@ public class StartButton : MonoBehaviour
 
 	public void Start_Gmae()
 	{
-		SceneManager.LoadScene("SampleScene");
+		
 	}
 
     // Update is called once per frame
