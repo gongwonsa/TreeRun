@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharMovement : MonoBehaviour
 {
-    public float speed = 0.02f;
+    public float speed = 0.5f;
     Rigidbody rb;
     Camera camera;
     string prevPlatformName;
@@ -46,7 +46,14 @@ public class CharMovement : MonoBehaviour
 
         if (scoreObj.GetScore() % 10 < 1)
         {
-            speed += 0.02f;
+			if (scoreObj.GetScore() %1000 <500)
+			{
+				speed += 0.05f;
+			}
+			else if (scoreObj.GetScore() %1000 >500)
+			{
+				speed += 0.01f;
+			}
         }
 
 
@@ -84,7 +91,7 @@ public class CharMovement : MonoBehaviour
         }
         else
         {
-            gameObject.transform.Translate(new Vector3(0.2f * Time.smoothDeltaTime, -10f * Time.smoothDeltaTime, 0 * Time.smoothDeltaTime));
+            gameObject.transform.Translate(new Vector3(3.5f * Time.smoothDeltaTime, -7.5f * Time.smoothDeltaTime, 0 * Time.smoothDeltaTime));
             deadtimebool = true;
             print("4");
             if (deadtime > 3.0f)

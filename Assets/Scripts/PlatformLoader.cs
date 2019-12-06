@@ -149,7 +149,7 @@ public class PlatformLoader : MonoBehaviour
 			}
 			else if (random == 1)
 			{
-				Instantiate(obstaclePrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + Random.Range(2, 3) * (platformHeight), 0), Quaternion.Euler(0, 0, 90));
+				Instantiate(obstaclePrefabs[random], new Vector3(newPlatform.transform.position.x + 3 * platformWidth, newPlatform.transform.position.y + Random.Range(1, 3) * (platformHeight), 0), Quaternion.Euler(0, 0, 90));
 			}
 			else
 			{

@@ -19,7 +19,7 @@ public class Bug : MonoBehaviour
             if (other.name == "Player")
             {
                 gameManager.playTimeCurrent += 2f;
-                scoreObj.AddScore(500);
+                scoreObj.AddScore(200);
 
                 if (gameManager.playTimeCurrent > gameManager.playTimeMax)
                 {
