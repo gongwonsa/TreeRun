@@ -67,7 +67,7 @@ public class CharMovement : MonoBehaviour
             {
                 // 캐릭터 움직임
                 //print(ray.collider.tag);
-                print("1");
+                //print("1");
                 gameObject.transform.Translate(new Vector3(0.4f * speed * Time.smoothDeltaTime, 0.2f * speed * Time.smoothDeltaTime, 0));
                 deadtime = 0.0f;
 
@@ -75,7 +75,7 @@ public class CharMovement : MonoBehaviour
             else if (ray.collider.tag == "Down")
             {
                 // 캐릭터 움직임
-                print("2");
+                //print("2");
                 gameObject.transform.Translate(new Vector3(0.4f * speed * Time.smoothDeltaTime, -0.2f * speed * Time.smoothDeltaTime, 0));
                 deadtime = 0.0f;
 
@@ -83,7 +83,7 @@ public class CharMovement : MonoBehaviour
             else
             {
                 // 캐릭터 움직임
-                print("3");
+                //print("3");
                 gameObject.transform.Translate(new Vector3(0.4f * speed * Time.smoothDeltaTime, 0, 0));
                 deadtime = 0.0f;
             }
@@ -92,10 +92,10 @@ public class CharMovement : MonoBehaviour
         {
             gameObject.transform.Translate(new Vector3(3.5f * Time.smoothDeltaTime, -7.5f * Time.smoothDeltaTime, 0 * Time.smoothDeltaTime));
             deadtimebool = true;
-            print("4");
+            //print("4");
             if (deadtime > 3.0f)
             {
-                print("5");
+                //print("5");
                 gameManager.GetComponent<GameManager>().PlayerDie();
                 deadtime = 0.0f;
             }
@@ -110,10 +110,11 @@ public class CharMovement : MonoBehaviour
         print(obj.name);
         if (obj.tag != "Player")
         {
+            //벌레 없앰 
             Destroy(obj.transform.parent.GetChild(1).gameObject);
         }
 
-        if (obj.tag == "Player" || obj.tag == "FlatPlatform")
+        if (obj.tag == "Player")
         {
             while (countTime < 6)
             {
@@ -128,12 +129,29 @@ public class CharMovement : MonoBehaviour
                 countTime++;
 
             }
-        } else
+        } else if (obj.tag == "FlatPlatform")
+        {
+            while (countTime < 6)
+            {
+
+                if (countTime % 2 == 0)
+                    obj.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
+                else
+                    obj.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 180);
+
+                yield return new WaitForSeconds(0.1f);
+
+                countTime++;
+
+            }
+        }
+        else
         {
             while (countTime < 6)
             {
                 if (countTime % 2 == 0)
                 {
+                    //print(obj.name + " " + obj.transform.GetChild(0));
                     obj.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
                     obj.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
                     obj.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
@@ -155,7 +173,12 @@ public class CharMovement : MonoBehaviour
             renderer.color = new Color32(255, 255, 255, 255);
         } else
         {
-            Destroy(obj.transform.parent.gameObject);
+            yield return new WaitForSeconds(0.5f);
+            //print(obj.transform.parent.gameObject);
+            //if (obj.transform.parent.gameObject != null)
+            //{
+                Destroy(obj.gameObject);
+            //}
         }
         //if (obj.transform.parent.tag == "Obstacle")
         //{
@@ -175,7 +198,7 @@ public class CharMovement : MonoBehaviour
 
 			
 		} else if (other.gameObject.name == "BugCollider") {
-            print(other.gameObject.transform.parent.GetChild(0).gameObject);
+            //print(other.gameObject.transform.parent.GetChild(0).gameObject);
 
 
             if (other.gameObject.transform.parent.GetChild(0).tag == "FlatPlatform")
@@ -186,9 +209,9 @@ public class CharMovement : MonoBehaviour
             else
             {
                 StartCoroutine("UnBeatTime", other.gameObject.transform.parent.GetChild(0).gameObject);
-                print(other.gameObject.transform.parent.GetChild(0).GetChild(0));
-                print(other.gameObject.transform.parent.GetChild(0).GetChild(1));
-                print(other.gameObject.transform.parent.GetChild(0).GetChild(2));
+                //print(other.gameObject.transform.parent.GetChild(0).GetChild(0));
+                //print(other.gameObject.transform.parent.GetChild(0).GetChild(1));
+                //print(other.gameObject.transform.parent.GetChild(0).GetChild(2));
                 other.gameObject.transform.parent.GetChild(0).GetChild(0).GetComponent<BoxCollider>().isTrigger = true;
                 other.gameObject.transform.parent.GetChild(0).GetChild(1).GetComponent<BoxCollider>().isTrigger = true;
                 other.gameObject.transform.parent.GetChild(0).GetChild(2).GetComponent<BoxCollider>().isTrigger = true;
@@ -246,7 +269,7 @@ public class CharMovement : MonoBehaviour
 
         if ((Physics.Raycast(transform.position, new Vector3(0, -1f, 0), out ray, 7.0f) == false)) {
 
-            print("엉엉");
+            //print("엉엉");
             gameManager.GetComponent<GameManager>().PlayerDie();
         } else
         {
@@ -254,7 +277,7 @@ public class CharMovement : MonoBehaviour
 
             if(ray.collider.tag == "Obstacle")
             {
-                print("떨어질때ㅐㅐㅐㅐㅐ");
+                //print("떨어질때ㅐㅐㅐㅐㅐ");
                 gameManager.GetComponent<GameManager>().PlayerDie();
             }
         }
