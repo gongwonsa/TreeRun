@@ -12,6 +12,7 @@ public class Bug : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         scoreObj = GameObject.Find("Score").GetComponent<Score>();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!gameManager.playerDie)

@@ -14,7 +14,6 @@ public class Canvas : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GameObject.Find("Player");
         platformLoad = GameObject.Find("PlatformLoad");
-        print("start1");
     }
 
     // Update is called once per frame
@@ -32,13 +31,13 @@ public class Canvas : MonoBehaviour
             platformLoad.GetComponent<PlatformLoader>().CreatePlatform(type);
             int random = Random.Range(0, 100);
 
-            if (random < 30)
+            if (random < 90)
             {
                 // 0 - 49
                 platformLoad.GetComponent<PlatformLoader>().CreateBug();
 
             }
-            else if (50 < random && random < 90)
+            else if (90 < random && random < 100)
             {
                 // 50 - 89
                 platformLoad.GetComponent<PlatformLoader>().CreateObstacle();

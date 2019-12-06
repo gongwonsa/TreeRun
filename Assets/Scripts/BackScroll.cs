@@ -25,7 +25,6 @@ public class BackScroll : MonoBehaviour
         player = GameObject.Find("Player");
         backWidth = this.transform.GetChild(0).GetComponent<RectTransform>().rect.width * 2.19f;
         backHeight = this.transform.GetChild(0).GetComponent<RectTransform>().rect.height * 1.9f;
-        print("start4");
     }
 
     // Update is called once per frame
