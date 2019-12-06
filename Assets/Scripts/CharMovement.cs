@@ -10,7 +10,8 @@ public class CharMovement : MonoBehaviour
     string prevPlatformName;
     string currentPlatformName;
     GameObject currentPlatform;
-    GameObject gameManager;
+    //GameObject gameManager;
+	GameManager gameManager;
 	SpriteRenderer renderer;
     Score scoreObj;
     //int score = 0f;
@@ -24,8 +25,9 @@ public class CharMovement : MonoBehaviour
 	{
 
 		renderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
-		gameManager = GameObject.Find("GameManager");
-        rb = gameObject.GetComponent<Rigidbody>();
+		//gameManager = GameObject.Find("GameManager");
+		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		rb = gameObject.GetComponent<Rigidbody>();
         scoreObj = GameObject.Find("Score").GetComponent<Score>();
         camera = Camera.main;
 
@@ -47,7 +49,7 @@ public class CharMovement : MonoBehaviour
         {
 			if (scoreObj.GetScore() %1000 <500)
 			{
-				speed += 0.05f;
+				speed += 0.04f;
 			}
 			else if (scoreObj.GetScore() %1000 >500)
 			{
@@ -171,6 +173,7 @@ public class CharMovement : MonoBehaviour
 	{
 		if (other.gameObject.tag == "Obstacle")
 		{
+			gameManager.playTimeCurrent -= 2f;
 			StartCoroutine("UnBeatTime", gameObject);
 
 			

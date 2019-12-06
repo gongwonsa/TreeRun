@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public Image Timebar;
     public bool playerDie;
 	public GameObject resultPanel;
+	Score bestscore;
+	public Text BestScoretxt;
     DataManager data;
     Score score;
     public float playTimeCurrent = 10;
@@ -22,7 +24,8 @@ public class GameManager : MonoBehaviour
         resultPanel.SetActive(false);
         //DataManager data = GameObject.Find("DataManager").GetComponent<DataManager>();
         score = GameObject.Find("Score").GetComponent<Score>();
-        Time.timeScale = 1.0f;
+		//bestscore = GameObject.Find("Score").GetComponent<Score>();
+		Time.timeScale = 1.0f;
     }
 
     void Update()
@@ -30,7 +33,7 @@ public class GameManager : MonoBehaviour
         if (playerDie == false)
         {
             playTimeCurrent -= 0.2f * Time.deltaTime;
-            //Timebar.fillAmount = playTimeCurrent / playTimeMax;
+            Timebar.fillAmount = playTimeCurrent / playTimeMax;
             //score.AddScore(40* Time.deltaTime);
 
             if (playTimeCurrent <=0)
@@ -64,7 +67,9 @@ public class GameManager : MonoBehaviour
 	{
 		print("게임오버");
 		resultPanel.SetActive(true);
-		//resulttext.text = " your score is " + DataManager.Instance.score;
+		score.GetbestScore();
+		BestScoretxt.text = "Score: " + Mathf.FloorToInt(score.GetbestScore());
+	
 		Time.timeScale = 0.0f;
 
 	}

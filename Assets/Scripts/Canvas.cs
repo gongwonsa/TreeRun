@@ -31,13 +31,13 @@ public class Canvas : MonoBehaviour
             platformLoad.GetComponent<PlatformLoader>().CreatePlatform(type);
             int random = Random.Range(0, 100);
 
-            if (random < 70)
+            if (random < 90)
             {
                 // 0 - 49
                 platformLoad.GetComponent<PlatformLoader>().CreateBug();
 
             }
-            else if (70 < random && random < 100)
+            else if (90 < random && random < 100)
             {
                 // 50 - 89
                 platformLoad.GetComponent<PlatformLoader>().CreateObstacle();
