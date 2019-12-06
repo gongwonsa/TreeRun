@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
         mainCamera = Camera.main;
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        print("start6");
+       
     }
 
     // Update is called once per frame

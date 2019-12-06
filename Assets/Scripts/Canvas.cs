@@ -14,7 +14,6 @@ public class Canvas : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GameObject.Find("Player");
         platformLoad = GameObject.Find("PlatformLoad");
-        print("start1");
     }
 
     // Update is called once per frame
@@ -25,9 +24,9 @@ public class Canvas : MonoBehaviour
 
     public void SetPlatformType(int type)
     {
-        // 현재 밟고 있는 플랫폼 앞에 다른 길이 있는 지 확인 
+        // 현재 밟고 있는 플랫폼 앞에 다른 길이 있는 지 확인
         if (player.GetComponent<CharMovement>().isExistPlatform() && gameManager.playerDie == false)
-        { 
+        {
             print("어억");
             platformLoad.GetComponent<PlatformLoader>().CreatePlatform(type);
             int random = Random.Range(0, 100);
@@ -45,10 +44,10 @@ public class Canvas : MonoBehaviour
             }
             else
             {
-                
+
             }
 
         }
 
-    } 
+    }
 }

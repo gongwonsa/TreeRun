@@ -28,7 +28,6 @@ public class CharMovement : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         scoreObj = GameObject.Find("Score").GetComponent<Score>();
         camera = Camera.main;
-        print("start5");
 
     }
 
@@ -103,40 +102,61 @@ public class CharMovement : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-
-    }
-
-
 
     IEnumerator UnBeatTime(GameObject obj)
 	{
 		int countTime = 0;
 
-        print(obj.tag);
+        print(obj.name);
         if (obj.tag != "Player")
         {
             Destroy(obj.transform.parent.GetChild(1).gameObject);
         }
 
-        while (countTime < 6)
-		{
+        if (obj.tag == "Player" || obj.tag == "FlatPlatform")
+        {
+            while (countTime < 6)
+            {
 
-			if (countTime % 2 == 0)
-				obj.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
-			else
-				obj.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 180);
+                if (countTime % 2 == 0)
+                    obj.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
+                else
+                    obj.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 180);
 
-			yield return new WaitForSeconds(0.3f);
+                yield return new WaitForSeconds(0.3f);
 
-			countTime++;
+                countTime++;
 
-		}
+            }
+        } else
+        {
+            while (countTime < 6)
+            {
+                if (countTime % 2 == 0)
+                {
+                    obj.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
+                    obj.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
+                    obj.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 90);
+                }
+                else
+                {
+                    obj.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 180);
+                    obj.transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 180);
+                    obj.transform.GetChild(2).GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 180);
+                }
+                yield return new WaitForSeconds(0.1f);
 
+                countTime++;
+            }
+        }
 
-		renderer.color = new Color32(255, 255, 255, 255);
-
+        if (obj.tag == "Player")
+        {
+            renderer.color = new Color32(255, 255, 255, 255);
+        } else
+        {
+            Destroy(obj.transform.parent.gameObject);
+        }
         //if (obj.transform.parent.tag == "Obstacle")
         //{
         //    Destroy(obj);
@@ -153,9 +173,9 @@ public class CharMovement : MonoBehaviour
 		{
 			StartCoroutine("UnBeatTime", gameObject);
 
-			print(" 깜박여라 제발");
+			
 		} else if (other.gameObject.name == "BugCollider") {
-            print(other.gameObject.transform.parent.GetChild(0).tag);
+            print(other.gameObject.transform.parent.GetChild(0).gameObject);
 
 
             if (other.gameObject.transform.parent.GetChild(0).tag == "FlatPlatform")
@@ -166,6 +186,9 @@ public class CharMovement : MonoBehaviour
             else
             {
                 StartCoroutine("UnBeatTime", other.gameObject.transform.parent.GetChild(0).gameObject);
+                print(other.gameObject.transform.parent.GetChild(0).GetChild(0));
+                print(other.gameObject.transform.parent.GetChild(0).GetChild(1));
+                print(other.gameObject.transform.parent.GetChild(0).GetChild(2));
                 other.gameObject.transform.parent.GetChild(0).GetChild(0).GetComponent<BoxCollider>().isTrigger = true;
                 other.gameObject.transform.parent.GetChild(0).GetChild(1).GetComponent<BoxCollider>().isTrigger = true;
                 other.gameObject.transform.parent.GetChild(0).GetChild(2).GetComponent<BoxCollider>().isTrigger = true;
@@ -175,13 +198,11 @@ public class CharMovement : MonoBehaviour
 	}
 
 
-
-    // 플레이어가 밟고 있는 플랫폼 다음에 다른 길이 있는 지 확인
     // 플레이어가 밟고 있는 플랫폼 다음에 다른 길이 있는 지 확인
     public bool isExistPlatform() {
 
         RaycastHit ray;
-        print(currentPlatform.tag);
+        //print(currentPlatform.tag);
 
         if (currentPlatform.tag == "FlatPlatform")
         {

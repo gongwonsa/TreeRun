@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
         //DataManager data = GameObject.Find("DataManager").GetComponent<DataManager>();
         score = GameObject.Find("Score").GetComponent<Score>();
         Time.timeScale = 1.0f;
-        print("start2");
     }
 
     void Update()
@@ -31,7 +30,7 @@ public class GameManager : MonoBehaviour
         if (playerDie == false)
         {
             playTimeCurrent -= 0.2f * Time.deltaTime;
-            Timebar.fillAmount = playTimeCurrent / playTimeMax;
+            //Timebar.fillAmount = playTimeCurrent / playTimeMax;
             //score.AddScore(40* Time.deltaTime);
 
             if (playTimeCurrent <=0)
