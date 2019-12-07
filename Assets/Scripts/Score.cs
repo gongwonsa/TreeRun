@@ -18,7 +18,7 @@ public class Score : MonoBehaviour
 	}
 	public void AddScore(float update)
 	{
-		print(Time.deltaTime);
+		//print(Time.deltaTime);
 		score += update;
 
 	}

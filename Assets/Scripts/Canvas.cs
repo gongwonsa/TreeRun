@@ -16,12 +16,6 @@ public class Canvas : MonoBehaviour
         platformLoad = GameObject.Find("PlatformLoad");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        print("아");
-    }
-
     public void SetPlatformType(int type)
     {
         // 현재 밟고 있는 플랫폼 앞에 다른 길이 있는 지 확인

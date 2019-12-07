@@ -10,8 +10,7 @@ public class CharMovement : MonoBehaviour
     string prevPlatformName;
     string currentPlatformName;
     GameObject currentPlatform;
-    //GameObject gameManager;
-	GameManager gameManager;
+    GameObject gameManager;
 	SpriteRenderer renderer;
     Score scoreObj;
     //int score = 0f;
@@ -25,9 +24,8 @@ public class CharMovement : MonoBehaviour
 	{
 
 		renderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
-		//gameManager = GameObject.Find("GameManager");
-		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-		rb = gameObject.GetComponent<Rigidbody>();
+		gameManager = GameObject.Find("GameManager");
+        rb = gameObject.GetComponent<Rigidbody>();
         scoreObj = GameObject.Find("Score").GetComponent<Score>();
         camera = Camera.main;
 
@@ -49,7 +47,7 @@ public class CharMovement : MonoBehaviour
         {
 			if (scoreObj.GetScore() %1000 <500)
 			{
-				speed += 0.04f;
+				speed += 0.05f;
 			}
 			else if (scoreObj.GetScore() %1000 >500)
 			{
@@ -131,6 +129,7 @@ public class CharMovement : MonoBehaviour
                 countTime++;
 
             }
+            renderer.color = new Color32(255, 255, 255, 255);
         } else if (obj.tag == "FlatPlatform")
         {
             while (countTime < 6)
@@ -146,6 +145,10 @@ public class CharMovement : MonoBehaviour
                 countTime++;
 
             }
+
+            yield return new WaitForSeconds(0.5f);
+            
+            Destroy(obj.gameObject);
         }
         else
         {
@@ -168,24 +171,11 @@ public class CharMovement : MonoBehaviour
 
                 countTime++;
             }
-        }
-
-        if (obj.tag == "Player")
-        {
-            renderer.color = new Color32(255, 255, 255, 255);
-        } else
-        {
             yield return new WaitForSeconds(0.5f);
-            //print(obj.transform.parent.gameObject);
-            //if (obj.transform.parent.gameObject != null)
-            //{
-                Destroy(obj.gameObject);
-            //}
+
+            Destroy(obj.gameObject);
         }
-        //if (obj.transform.parent.tag == "Obstacle")
-        //{
-        //    Destroy(obj);
-        //}
+        
 
 		isUnBearTime = false;
 
@@ -196,7 +186,6 @@ public class CharMovement : MonoBehaviour
 	{
 		if (other.gameObject.tag == "Obstacle")
 		{
-			gameManager.playTimeCurrent -= 2f;
 			StartCoroutine("UnBeatTime", gameObject);
 
 			
