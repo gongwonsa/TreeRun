@@ -13,11 +13,11 @@ public class CharMovement : MonoBehaviour
     GameObject gameManager;
 	SpriteRenderer renderer;
     Score scoreObj;
-    //int score = 0f;
 	float deadtime = 0f;
 	bool deadtimebool = false;
 	bool isUnBearTime = true;
     float dieTime = 2f;
+	int backcount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -54,57 +54,72 @@ public class CharMovement : MonoBehaviour
 				speed += 0.01f;
 			}
         }
+		if (backcount == 0)
+		{
+			if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out ray, 1.5f))
+			{
 
 
-        if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out ray, 1.5f))
-        {
+				// 현재 밟고 있는 플랫폼의 종류와 오브젝트 이름
+				//platform.Insert(0, ray.collider.gameObject.transform.parent.tag);
+				currentPlatform = ray.collider.gameObject;
 
-            // 현재 밟고 있는 플랫폼의 종류와 오브젝트 이름
-            //platform.Insert(0, ray.collider.gameObject.transform.parent.tag);
-            currentPlatform = ray.collider.gameObject;
+				if (ray.collider.tag == "Up")
+				{
+					// 캐릭터 움직임
+					//print(ray.collider.tag);
+					//print("1");
+					gameObject.transform.Translate(new Vector3(0.4f * speed * Time.smoothDeltaTime, 0.2f * speed * Time.smoothDeltaTime, 0));
+					deadtime = 0.0f;
 
-            if (ray.collider.tag == "Up")
-            {
-                // 캐릭터 움직임
-                //print(ray.collider.tag);
-                //print("1");
-                gameObject.transform.Translate(new Vector3(0.4f * speed * Time.smoothDeltaTime, 0.2f * speed * Time.smoothDeltaTime, 0));
-                deadtime = 0.0f;
+				}
+				else if (ray.collider.tag == "Down")
+				{
+					// 캐릭터 움직임
+					//print("2");
+					gameObject.transform.Translate(new Vector3(0.4f * speed * Time.smoothDeltaTime, -0.2f * speed * Time.smoothDeltaTime, 0));
+					deadtime = 0.0f;
 
-            }
-            else if (ray.collider.tag == "Down")
-            {
-                // 캐릭터 움직임
-                //print("2");
-                gameObject.transform.Translate(new Vector3(0.4f * speed * Time.smoothDeltaTime, -0.2f * speed * Time.smoothDeltaTime, 0));
-                deadtime = 0.0f;
+				}
+				else
+				{
+					// 캐릭터 움직임
+					//print("3");
+					gameObject.transform.Translate(new Vector3(0.4f * speed * Time.smoothDeltaTime, 0, 0));
+					deadtime = 0.0f;
+				}
+			}
+			else
+			{
+				gameObject.transform.Translate(new Vector3(3.5f * Time.smoothDeltaTime, -7.5f * Time.smoothDeltaTime, 0 * Time.smoothDeltaTime));
+				deadtimebool = true;
+				//print("4");
+				if (deadtime > 3.0f)
+				{
+					//print("5");
+					gameManager.GetComponent<GameManager>().PlayerDie();
+					deadtime = 0.0f;
+				}
+			}
+		}
+		else if (backcount == 1)
+				StartCoroutine("BackMove", gameObject);
+	}
 
-            }
-            else
-            {
-                // 캐릭터 움직임
-                //print("3");
-                gameObject.transform.Translate(new Vector3(0.4f * speed * Time.smoothDeltaTime, 0, 0));
-                deadtime = 0.0f;
-            }
-        }
-        else
-        {
-            gameObject.transform.Translate(new Vector3(3.5f * Time.smoothDeltaTime, -7.5f * Time.smoothDeltaTime, 0 * Time.smoothDeltaTime));
-            deadtimebool = true;
-            //print("4");
-            if (deadtime > 3.0f)
-            {
-                //print("5");
-                gameManager.GetComponent<GameManager>().PlayerDie();
-                deadtime = 0.0f;
-            }
-        }
-    }
+	IEnumerator BackMove(GameObject obj)
+	{
+		
+		gameObject.transform.Translate(new Vector3(-0.7f * speed * Time.smoothDeltaTime, 0, 0));
 
+		yield return new WaitForSeconds(0.5f);
+		if (backcount == 1)
+			backcount--;
+
+	}
 
     IEnumerator UnBeatTime(GameObject obj)
 	{
+
 		int countTime = 0;
 
         print(obj.name);
@@ -147,9 +162,9 @@ public class CharMovement : MonoBehaviour
             }
 
             yield return new WaitForSeconds(0.5f);
-            
-            Destroy(obj.gameObject);
-        }
+
+			Destroy(obj.transform.parent.gameObject);
+		}
         else
         {
             while (countTime < 6)
@@ -173,43 +188,45 @@ public class CharMovement : MonoBehaviour
             }
             yield return new WaitForSeconds(0.5f);
 
-            Destroy(obj.gameObject);
+            Destroy(obj.transform.parent.gameObject);
         }
-        
-
 		isUnBearTime = false;
 
 		yield return null;
 	}
+        
 
 	private void OnTriggerEnter(Collider other)
 	{
+		
 		if (other.gameObject.tag == "Obstacle")
 		{
 			StartCoroutine("UnBeatTime", gameObject);
 
 			
 		} else if (other.gameObject.name == "BugCollider") {
-            //print(other.gameObject.transform.parent.GetChild(0).gameObject);
+			//print(other.gameObject.transform.parent.GetChild(0).gameObject);
 
 
-            if (other.gameObject.transform.parent.GetChild(0).tag == "FlatPlatform")
+			if (other.gameObject.transform.parent.GetChild(0).tag == "FlatPlatform")
             {
-                StartCoroutine("UnBeatTime", other.gameObject.transform.parent.GetChild(0).gameObject);
+				if (backcount == 0)
+					backcount++;
+				StartCoroutine("UnBeatTime", other.gameObject.transform.parent.GetChild(0).gameObject);
                 other.gameObject.transform.parent.GetChild(0).GetComponent<BoxCollider>().isTrigger = true;
             }
             else
             {
-                StartCoroutine("UnBeatTime", other.gameObject.transform.parent.GetChild(0).gameObject);
-                //print(other.gameObject.transform.parent.GetChild(0).GetChild(0));
-                //print(other.gameObject.transform.parent.GetChild(0).GetChild(1));
-                //print(other.gameObject.transform.parent.GetChild(0).GetChild(2));
+				if (backcount == 0)
+					backcount++;
+				StartCoroutine("UnBeatTime", other.gameObject.transform.parent.GetChild(0).gameObject);
                 other.gameObject.transform.parent.GetChild(0).GetChild(0).GetComponent<BoxCollider>().isTrigger = true;
                 other.gameObject.transform.parent.GetChild(0).GetChild(1).GetComponent<BoxCollider>().isTrigger = true;
                 other.gameObject.transform.parent.GetChild(0).GetChild(2).GetComponent<BoxCollider>().isTrigger = true;
             }
-        }
 
+			
+		}
 	}
 
 
@@ -217,7 +234,6 @@ public class CharMovement : MonoBehaviour
     public bool isExistPlatform() {
 
         RaycastHit ray;
-        //print(currentPlatform.tag);
 
         if (currentPlatform.tag == "FlatPlatform")
         {
