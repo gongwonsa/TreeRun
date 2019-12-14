@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharMovement : MonoBehaviour
 {
+    AudioSource puck;
     public float speed = 0.5f;
     Rigidbody rb;
     Camera camera;
@@ -22,7 +23,7 @@ public class CharMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-
+        puck = GetComponent<AudioSource>();
 		renderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
 		gameManager = GameObject.Find("GameManager");
         rb = gameObject.GetComponent<Rigidbody>();
@@ -201,10 +202,12 @@ public class CharMovement : MonoBehaviour
 		
 		if (other.gameObject.tag == "Obstacle")
 		{
+            puck.Play();
 			StartCoroutine("UnBeatTime", gameObject);
 
 			
 		} else if (other.gameObject.name == "BugCollider") {
+            puck.Play();
 			//print(other.gameObject.transform.parent.GetChild(0).gameObject);
 
 
