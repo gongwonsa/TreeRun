@@ -51,10 +51,6 @@ public class CharMovement : MonoBehaviour
 			{
                 speed += 0.01f;
             }
-			else if (scoreObj.GetScore() %1000 >500)
-			{
-                speed += 0.0001f;
-            }
         }
 		if (backcount == 0)
 		{
@@ -101,8 +97,9 @@ public class CharMovement : MonoBehaviour
 				//print("4");
 				if (deadtime > 3.0f)
 				{
-					//print("5");
-					gameManager.GetComponent<GameManager>().PlayerDie();
+                    //print("5");
+
+                    gameManager.GetComponent<GameManager>().PlayerDie();
 					deadtime = 0.0f;
 				}
 			}
@@ -111,8 +108,7 @@ public class CharMovement : MonoBehaviour
 				StartCoroutine("BackMove", gameObject);
 	}
 
-	IEnumerator BackMove(GameObject obj)
-	{
+	IEnumerator BackMove(GameObject obj)	{
 
         //gameObject.transform.Translate(new Vector3(-0.7f * speed * Time.smoothDeltaTime, 0, 0));
         gameObject.transform.Translate(new Vector3(1 * -0.7f, 0,0).normalized * speed * Time.smoothDeltaTime);
@@ -207,11 +203,13 @@ public class CharMovement : MonoBehaviour
 
 		if (other.gameObject.CompareTag("Obstacle"))
 		{
+            gameManager.GetComponent<GameManager>().playTimeCurrent -= 1f;
             puck.Play();
 			StartCoroutine("UnBeatTime", gameObject);
 
 
 		} else if (other.gameObject.name == "BugCollider") {
+            gameManager.GetComponent<GameManager>().playTimeCurrent -= 1f;
             puck.Play();
 			//print(other.gameObject.transform.parent.GetChild(0).gameObject);
 

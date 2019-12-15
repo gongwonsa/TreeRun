@@ -122,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 35187493}
   - component: {fileID: 35187492}
-  - component: {fileID: 35187495}
   - component: {fileID: 35187494}
   m_Layer: 0
   m_Name: SceneController
@@ -254,14 +253,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!81 &35187495
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35187491}
-  m_Enabled: 1
 --- !u!1 &47405843
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class SceneController : MonoBehaviour
     {
         playBgm = GetComponent<AudioSource>();
         DontDestroyOnLoad(gameObject);
-        //playBgm.Play();
+        playBgm.Play();
     }
     public void SceneRoad(string sceneName)
 	{

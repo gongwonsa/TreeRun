@@ -7,11 +7,11 @@ public class Canvas : MonoBehaviour
     GameObject player;
     GameObject platformLoad;
     GameManager gameManager;
-    AudioSource audio;
+    AudioSource clickaudio;
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+       clickaudio = GetComponent<AudioSource>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GameObject.Find("Player");
         platformLoad = GameObject.Find("PlatformLoad");
@@ -26,13 +26,13 @@ public class Canvas : MonoBehaviour
             platformLoad.GetComponent<PlatformLoader>().CreatePlatform(type);
             int random = Random.Range(0, 100);
 
-            if (random < 90)
+            if (random < 60)
             {
                 // 0 - 49
                 platformLoad.GetComponent<PlatformLoader>().CreateBug();
 
             }
-            else if (90 < random && random < 100)
+            else if (60 < random && random < 100)
             {
                 // 50 - 89
                 platformLoad.GetComponent<PlatformLoader>().CreateObstacle();
@@ -48,6 +48,6 @@ public class Canvas : MonoBehaviour
 
     public void clicksound()
     {
-        audio.Play();
+        clickaudio.Play();
     }
 }
