@@ -6,19 +6,18 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     public AudioSource playBgm;
-    AudioClip InGameBgm;
+    //AudioClip InGameBgm;
 
     private void Awake()
     {
         playBgm = GetComponent<AudioSource>();
         DontDestroyOnLoad(gameObject);
-        playBgm.Play();
+        //playBgm.Play();
     }
     public void SceneRoad(string sceneName)
 	{
        
         SceneManager.LoadScene(sceneName);
-        playBgm.clip = InGameBgm;
-        playBgm.Play();
+        playBgm.Stop();
     }
 }
