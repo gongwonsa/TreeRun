@@ -7,10 +7,11 @@ public class Canvas : MonoBehaviour
     GameObject player;
     GameObject platformLoad;
     GameManager gameManager;
-
+    AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GameObject.Find("Player");
         platformLoad = GameObject.Find("PlatformLoad");
@@ -43,5 +44,10 @@ public class Canvas : MonoBehaviour
 
         }
 
+    }
+
+    public void clicksound()
+    {
+        audio.Play();
     }
 }
