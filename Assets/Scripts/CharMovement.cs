@@ -24,7 +24,7 @@ public class CharMovement : MonoBehaviour
     void Start()
 	{
         puck = GetComponent<AudioSource>();
-		renderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
+		myRenderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
 		gameManager = GameObject.Find("GameManager");
         rb = gameObject.GetComponent<Rigidbody>();
         scoreObj = GameObject.Find("Score").GetComponent<Score>();

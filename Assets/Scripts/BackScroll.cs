@@ -60,7 +60,7 @@ public class BackScroll : MonoBehaviour
             {
                 cnt_x++;
                 print("평");
-                Instantiate(backGround, new Vector3(transform.position.x + backWidth * 2, transform.position.y, transform.position.z), Quaternion.identity);
+                Instantiate(backGround, new Vector3(transform.position.x + backWidth *1.58f, transform.position.y, transform.position.z), Quaternion.identity);
 
             }
 
@@ -90,7 +90,7 @@ public class BackScroll : MonoBehaviour
         
         // 옆으로 만들 때
         if (dir == 0) {
-            //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(1, 0, 0) * (backWidth + 2.0f), Color.blue, 100.0f);
+            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(1, 0, 0) * (backWidth + 2.0f), Color.blue, 100.0f);
             if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(1,0,0), backWidth + 5.0f, layerMask))
             {
                 //print("이거1");
