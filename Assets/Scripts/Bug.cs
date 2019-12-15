@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Bug : MonoBehaviour
 {
+    AudioSource audioSource;
     GameManager gameManager;
     Score scoreObj;
 
     void Start ()
     {
+        audioSource = GetComponent<AudioSource>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         scoreObj = GameObject.Find("Score").GetComponent<Score>();
     }
@@ -21,6 +23,7 @@ public class Bug : MonoBehaviour
             {
                 gameManager.playTimeCurrent += 2f;
                 scoreObj.AddScore(200);
+                audioSource.Play();
 
                 if (gameManager.playTimeCurrent > gameManager.playTimeMax)
                 {

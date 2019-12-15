@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharMovement : MonoBehaviour
 {
+    AudioSource puck;
     public float speed = 0.5f;
     Rigidbody rb;
     Camera myCamera;
@@ -22,8 +23,8 @@ public class CharMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-
-		myRenderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
+        puck = GetComponent<AudioSource>();
+		renderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
 		gameManager = GameObject.Find("GameManager");
         rb = gameObject.GetComponent<Rigidbody>();
         scoreObj = GameObject.Find("Score").GetComponent<Score>();
@@ -130,7 +131,7 @@ public class CharMovement : MonoBehaviour
         print(obj.name);
         if (obj.CompareTag("Player") == false)
         {
-            //벌레 없앰 
+            //벌레 없앰
             Destroy(obj.transform.parent.GetChild(1).gameObject);
         }
 
@@ -199,17 +200,19 @@ public class CharMovement : MonoBehaviour
 
 		yield return null;
 	}
-        
+
 
 	private void OnTriggerEnter(Collider other)
 	{
-		
+
 		if (other.gameObject.CompareTag("Obstacle"))
 		{
+            puck.Play();
 			StartCoroutine("UnBeatTime", gameObject);
 
-			
+
 		} else if (other.gameObject.name == "BugCollider") {
+            puck.Play();
 			//print(other.gameObject.transform.parent.GetChild(0).gameObject);
 
 
@@ -230,7 +233,7 @@ public class CharMovement : MonoBehaviour
                 other.gameObject.transform.parent.GetChild(0).GetChild(2).GetComponent<BoxCollider>().isTrigger = true;
             }
 
-			
+
 		}
 	}
 
@@ -274,7 +277,7 @@ public class CharMovement : MonoBehaviour
 
     }
 
-   
+
     void isFallDown()
     {
         //Debug.DrawRay(new Vector3(transform.position.x + 1.0f, transform.position.y, transform.position.z), new Vector3(0, -7, 0), Color.red, 100.0f);
