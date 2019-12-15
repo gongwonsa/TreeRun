@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharMovement : MonoBehaviour
 {
     AudioSource puck;
-    public float speed = 0.5f;
+    public float speed = 0.05f;
     Rigidbody rb;
     Camera myCamera;
     string prevPlatformName;
@@ -47,7 +47,7 @@ public class CharMovement : MonoBehaviour
 
         if (scoreObj.GetScore() % 10 < 1)
         {
-			if (scoreObj.GetScore() %1000 <500)
+            if (scoreObj.GetScore() % 1000 < 500 && speed < 200f)
 			{
                 speed += 0.01f;
             }
@@ -85,7 +85,7 @@ public class CharMovement : MonoBehaviour
 				{
                     // 캐릭터 움직임
                     //print("3");
-                    gameObject.transform.Translate(new Vector3(1, 0, 0).normalized * speed * Time.smoothDeltaTime);
+                    gameObject.transform.Translate(new Vector3(0.5f, 0, 0).normalized * speed * Time.smoothDeltaTime);
                     //gameObject.transform.Translate(new Vector3(0.4f */* speed **/ Time.smoothDeltaTime, 0, 0).normalized);
 					deadtime = 0.0f;
 				}
