@@ -8,7 +8,7 @@ public class Score : MonoBehaviour
 	static Score instance = null;
     public Text ScoreText;
     GameObject gameManager;
-    int updateScore = 4;
+    //int updateScore = 4;
     float score;
 	float best_score;
 

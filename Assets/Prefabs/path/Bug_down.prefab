@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8733742787965010627}
   - component: {fileID: 6974227559116707341}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BugCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1309733050402786730}
   - component: {fileID: 5645539539883808931}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bug_down
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3855218134598397403}
   - component: {fileID: 2943558770734808731}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BugCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1669213283432599494}
   - component: {fileID: 2192276292393888801}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BugCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2839838917220676410}
   - component: {fileID: 6200026663700290975}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BugCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,6 +284,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: down
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771097579698682489, guid: c945a16f60eebac4da1b68759f7e4623,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6044494647360719217, guid: c945a16f60eebac4da1b68759f7e4623,
         type: 3}
@@ -340,6 +345,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8159941415327397955, guid: c945a16f60eebac4da1b68759f7e4623,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942046676919449377, guid: c945a16f60eebac4da1b68759f7e4623,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5815528230644471232, guid: c945a16f60eebac4da1b68759f7e4623,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6941206768110830163, guid: c945a16f60eebac4da1b68759f7e4623,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.090745
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619200765946677306, guid: c945a16f60eebac4da1b68759f7e4623,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.0907451
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619200765946677306, guid: c945a16f60eebac4da1b68759f7e4623,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.039049625
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c945a16f60eebac4da1b68759f7e4623, type: 3}
 --- !u!1 &2772170086496987765 stripped
@@ -365,6 +400,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bug
+      objectReference: {fileID: 0}
+    - target: {fileID: 6937904287519771833, guid: ade98831e4cbe0e4c9e50d46f045d041,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6937904287519771834, guid: ade98831e4cbe0e4c9e50d46f045d041,
         type: 3}

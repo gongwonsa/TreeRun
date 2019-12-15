@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerDie == false)
         {
-            playTimeCurrent -= 0.2f * Time.deltaTime;
+            //playTimeCurrent -= 0.2f * Time.deltaTime;
             //Timebar.fillAmount = playTimeCurrent / playTimeMax;
             //score.AddScore(40* Time.deltaTime);
 

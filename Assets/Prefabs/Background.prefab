@@ -68,7 +68,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0ced7c9ded2d7a845a64a2e0d54fca7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 407c3fad0851d0345a3837dad2d6903b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4583537936960652441}
   - component: {fileID: 4583537936960652439}
+  - component: {fileID: 606980829807800653}
   m_Layer: 0
   m_Name: Background (1)
   m_TagString: Untagged
@@ -147,7 +148,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0ced7c9ded2d7a845a64a2e0d54fca7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 407c3fad0851d0345a3837dad2d6903b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -158,6 +159,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &606980829807800653
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583537936960652442}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 10.8, y: 1.193638, z: 1.303666}
+  m_Center: {x: 0, y: 5.5, z: 0}
 --- !u!1 &4583537937199821613
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4321355330880317002}
   - component: {fileID: 4583537937199821612}
+  - component: {fileID: 7297055048925641569}
   m_Layer: 0
   m_Name: Backgrounds
   m_TagString: Untagged
@@ -231,7 +246,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0ced7c9ded2d7a845a64a2e0d54fca7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 407c3fad0851d0345a3837dad2d6903b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -242,6 +257,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &7297055048925641569
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583537937199821613}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1.193638, y: 10.8, z: 1.303666}
+  m_Center: {x: -16, y: 0, z: 0}
 --- !u!1 &4583537937311157081
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +338,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0ced7c9ded2d7a845a64a2e0d54fca7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 407c3fad0851d0345a3837dad2d6903b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -331,9 +359,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4583537937433690954}
   - component: {fileID: 4583537937433690955}
-  m_Layer: 0
+  - component: {fileID: 7238228675388128550}
+  m_Layer: 9
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -371,6 +400,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backGround: {fileID: 4583537937433690956}
+--- !u!65 &7238228675388128550
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583537937433690956}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 74.57975, y: 68.27786, z: 18.50757}
+  m_Center: {x: -2.1659355, y: 0.827919, z: 3.2835512}
 --- !u!1 &4583537937972567575
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4583537937972567574}
   - component: {fileID: 4583537937972567572}
+  - component: {fileID: 7129879544555938080}
   m_Layer: 0
   m_Name: Background (2)
   m_TagString: Untagged
@@ -439,7 +482,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0ced7c9ded2d7a845a64a2e0d54fca7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 407c3fad0851d0345a3837dad2d6903b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -450,6 +493,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &7129879544555938080
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583537937972567575}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1.1936377, y: 10.8, z: 1.3036661}
+  m_Center: {x: 0.06935205, y: 0, z: 0.10290384}
 --- !u!1 &4583537938178003435
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,6 +516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4583537938178003434}
   - component: {fileID: 4583537938178003432}
+  - component: {fileID: 4623612700796460397}
   m_Layer: 0
   m_Name: Background (4)
   m_TagString: Untagged
@@ -518,7 +575,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0ced7c9ded2d7a845a64a2e0d54fca7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 407c3fad0851d0345a3837dad2d6903b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -529,3 +586,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &4623612700796460397
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583537938178003435}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 10.8, y: 1.193638, z: 1.303666}
+  m_Center: {x: 0, y: -5.5, z: 0}
