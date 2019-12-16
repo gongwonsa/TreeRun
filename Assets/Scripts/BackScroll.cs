@@ -69,14 +69,14 @@ public class BackScroll : MonoBehaviour
             {
                 cnt_y_plus++;
                 print("하");
-                Instantiate(backGround, new Vector3(transform.position.x, transform.position.y - 3 * backHeight, transform.position.z), Quaternion.identity);
+                Instantiate(backGround, new Vector3(transform.position.x, transform.position.y - 3.023f * backHeight, transform.position.z), Quaternion.identity);
             }
 
             if (cnt_y_minus == 0 && transform.position.y < player.transform.position.y && IsExistBackground(2) /*- backHeight*/)
             {
                 cnt_y_minus++;
                 print("위");
-                Instantiate(backGround, new Vector3(transform.position.x, transform.position.y + 3 * backHeight, transform.position.z), Quaternion.identity);
+                Instantiate(backGround, new Vector3(transform.position.x, transform.position.y + 3.023f * backHeight, transform.position.z), Quaternion.identity);
             }
         }
     }
