@@ -19,6 +19,7 @@ public class CharMovement : MonoBehaviour
 	bool isUnBearTime = true;
     //float dieTime = 2f;
 	int backcount = 0;
+    Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class CharMovement : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         scoreObj = GameObject.Find("Score").GetComponent<Score>();
         myCamera = Camera.main;
+        anim = gameObject.GetComponent<Animator>();
         //Input.acceleration.normalized;
 
     }
