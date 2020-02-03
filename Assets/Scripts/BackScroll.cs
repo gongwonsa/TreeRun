@@ -52,8 +52,8 @@ public class BackScroll : MonoBehaviour
         }
 
           
-        if (this.transform.position.y > player.transform.position.y - backHeight && this.transform.position.y < player.transform.position.y + backHeight/*+ backHeight*//* * 2*/)
-        {
+        //if (this.transform.position.y > player.transform.position.y - backHeight && this.transform.position.y < player.transform.position.y + backHeight/*+ backHeight*//* * 2*/)
+        //{
             
             // x축으로 새로운 배경 만들기
             if (cnt_x == 0 && transform.position.x < player.transform.position.x + backWidth*3f && IsExistBackground(0))
@@ -65,20 +65,20 @@ public class BackScroll : MonoBehaviour
             }
 
             // y축으로 새로운 배경 만들기
-            if (cnt_y_plus == 0 && transform.position.y > player.transform.position.y && IsExistBackground(1) /*+ backHeight*/)
-            {
-                cnt_y_plus++;
-                print("하");
-                Instantiate(backGround, new Vector3(transform.position.x, transform.position.y - 3.023f * backHeight, transform.position.z), Quaternion.identity);
-            }
+            //if (cnt_y_plus == 0 && transform.position.y > player.transform.position.y && IsExistBackground(1) /*+ backHeight*/)
+            //{
+            //    cnt_y_plus++;
+            //    print("하");
+            //    Instantiate(backGround, new Vector3(transform.position.x, transform.position.y - 3.023f * backHeight, transform.position.z), Quaternion.identity);
+            //}
 
-            if (cnt_y_minus == 0 && transform.position.y < player.transform.position.y && IsExistBackground(2) /*- backHeight*/)
-            {
-                cnt_y_minus++;
-                print("위");
-                Instantiate(backGround, new Vector3(transform.position.x, transform.position.y + 3.023f * backHeight, transform.position.z), Quaternion.identity);
-            }
-        }
+            //if (cnt_y_minus == 0 && transform.position.y < player.transform.position.y && IsExistBackground(2) /*- backHeight*/)
+            //{
+            //    cnt_y_minus++;
+            //    print("위");
+            //    Instantiate(backGround, new Vector3(transform.position.x, transform.position.y + 3.023f * backHeight, transform.position.z), Quaternion.identity);
+            //}
+        //}
     }
 
     private bool IsExistBackground(int dir)
@@ -88,8 +88,8 @@ public class BackScroll : MonoBehaviour
         //Ray ray;
 
         
-        // 옆으로 만들 때
-        if (dir == 0) {
+        //// 옆으로 만들 때
+        //if (dir == 0) {
             Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(1, 0, 0) * (backWidth + 2.0f), Color.blue, 100.0f);
             if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(1,0,0), backWidth + 5.0f, layerMask))
             {
@@ -100,34 +100,34 @@ public class BackScroll : MonoBehaviour
                 
                 return true;
             }
-        }
-        else if(dir == 1)
-        {
-            //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(0, -1, 0) * (backHeight * 2 + 1.5f), Color.blue, 100.0f);
-            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(0, -1, 0), backHeight * 2 + 5f, layerMask))
-            {
-                //print("이거2");
-                return false;
-            }
-            else
-            {
+        //}
+        //else if(dir == 1)
+        //{
+        //    //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(0, -1, 0) * (backHeight * 2 + 1.5f), Color.blue, 100.0f);
+        //    if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(0, -1, 0), backHeight * 2 + 5f, layerMask))
+        //    {
+        //        //print("이거2");
+        //        return false;
+        //    }
+        //    else
+        //    {
                 
-                return true;
-            }
-        } else
-        {
-            //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(0, 1, 0) * (backHeight * 2 + 1.5f), Color.blue, 100.0f);
-            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(0, 1, 0), backHeight * 2 + 5f, layerMask))
-            {
-                //print("이거3");
-                return false;
-            }
-            else
-            {
+        //        return true;
+        //    }
+        //} else
+        //{
+        //    //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(0, 1, 0) * (backHeight * 2 + 1.5f), Color.blue, 100.0f);
+        //    if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, 9f), new Vector3(0, 1, 0), backHeight * 2 + 5f, layerMask))
+        //    {
+        //        //print("이거3");
+        //        return false;
+        //    }
+        //    else
+        //    {
                 
-                return true;
-            }
-        }
+        //        return true;
+        //    }
+        //}
     }
    
 }
